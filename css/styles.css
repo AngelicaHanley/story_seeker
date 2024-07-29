@@ -1,0 +1,15 @@
+/* General Website Style rules */
+body {
+    font-family: "Times New Roman", Times;
+    background-color: rgb(235, 248, 251);
+  }
+/*Comment: this will change all hyperlinked text to have this color*/
+a {
+  color: rgb(0, 115, 186); 
+}
+/*Top header profile image*/
+.profile-small {
+  height:150px;
+  border-radius: 50%;
+  border: 10px double #FFFFFF;
+}
