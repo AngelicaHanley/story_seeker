@@ -2,14 +2,49 @@
 body {
     font-family: "Times New Roman", Times;
     background-color: rgb(235, 248, 251);
+    margin: 0;
   }
-/*Comment: this will change all hyperlinked text to have this color*/
-a {
-  color: rgb(0, 115, 186); 
+/*Top div class*/
+.div-1 {
+  background-color: lightskyblue;
+  height:480px; 
+  padding-top:80px;
+  text-align:center;
+}
+.div-2 {
+  background-color: rgb(235, 248, 251);
+  height:500px; 
+  padding-top:50px;
 }
 /*Top header profile image*/
 .profile-small {
   height:150px;
   border-radius: 50%;
   border: 10px double #FFFFFF;
+}
+/*Styling element instead of specific class*/
+h1 {
+  font-size:100px;
+  color:white;
+  margin:10px;
+}
+.p-1 {
+font-size:30px;
+color: white;
+}
+/*Comment: this will change all hyperlinked text to have this color*/
+.link-style {
+  font-size:20px;
+  color: rgb(0, 115, 186); 
+}
+footer {
+  height:auto;
+  background-color:lightskyblue;
+}
+h2 {
+color:white;
+margin:10px;
+padding:40px;
+margin:0;
+text-align:center;
 }
