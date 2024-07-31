@@ -109,4 +109,5 @@ text-align:center;
   grid-template-columns: repeat(5, 1fr); /* 5 columns */
   grid-gap: 5px; /* Space between grid items */
   padding: 50px; /* Padding around the grid from edges*/
+  grid-row-gap: 30px; /* Additional vertical space between rows */
 }

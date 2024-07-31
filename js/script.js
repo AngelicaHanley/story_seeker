@@ -73,9 +73,29 @@ function displayBooks() {
  
          // Append the book container to the grid
          bookGrid.appendChild(bookDiv);
+
+
+        // Add click event listener to the book div
+        bookDiv.addEventListener('click', () => {
+            // Toggle bookClicked state
+            book.bookClicked = !book.bookClicked;
+
+            // Toggle frame visibility
+            if (book.bookClicked) {
+               // img.style.border = '10px solid lightskyblue'; // Example highlight
+               img.style.boxShadow = '0 0 15px 12px lightskyblue';
+            } else {
+                img.style.border = 'none';
+            }
+        });
+
+        // Append image to the book container
+        bookDiv.appendChild(img);
+
+        // Append the book container to the grid
+        bookGrid.appendChild(bookDiv);
     });
 }
 
 // Call the function to display books when the page loads
-//window.onload = displayBooks;
 displayBooks();
