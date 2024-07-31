@@ -9,27 +9,27 @@ function Book(title, imagePath, genres) {
 
 // Create an array of book objects
 let books = [
-    new Book("Book Lovers", "css/images/BookLoversCover.jpeg", ["Romance", "Fiction"]),
-    new Book("We Were Liars", "css/images/WeWereLiarsCover.jpeg", ["Mystery", "Young Adult"]),
-    new Book("The Great Gatsby", "css/images/TheGreatGatsbyCover.jpeg", ["Classic", "Fiction"]),
-    new Book("The Summer I Turned Pretty", "css/images/TheSummerITurnedPrettyCover.jpg", ["Romance", "Young Adult"]),
-    new Book("Fourth Wing", "css/images/FourthWingCover.jpeg", ["Fantasy", "Adventure"]),
-    new Book("Harry Potter", "css/images/HarryPotterCover.jpeg", ["Fantasy", "Adventure"]),
-    new Book("All The Bright Places", "css/images/AllTheBrightPlacesCover.jpeg", ["Romance", "Young Adult"]),
-    new Book("From Lukov With Love", "css/images/FromLukovWithLoveCover.jpeg", ["Romance", "Fiction"]),
-    new Book("Heartstopper", "css/images/HeartstopperCover.jpeg", ["Romance", "Graphic Novel"]),
-    new Book("The Seven Husbands of Evelyn Hugo", "css/images/TheSevenHusbandsOfEvelynHugoCover.jpeg", ["Historical", "Romance"]),
-    new Book("Today Tonight Tomorrow", "css/images/TodayTonightTomorrowCover.jpeg", ["Romance", "Young Adult"]),
-    new Book("The Cruel Prince", "css/images/TheCruelPrinceCover.jpeg", ["Fantasy", "Adventure"]),
+        new Book("Book Lovers", "css/images/BookLoversCover.jpeg", ["Romance", "Fiction"]),
+        new Book("We Were Liars", "css/images/WeWereLiarsCover.jpeg", ["Mystery", "Young Adult"]),
+        new Book("The Great Gatsby", "css/images/TheGreatGatsbyCover.jpeg", ["Classic", "Fiction"]),
+        new Book("The Summer I Turned Pretty", "css/images/TheSummerITurnedPrettyCover.jpg", ["Romance", "Young Adult"]),
+        new Book("Fourth Wing", "css/images/FourthWingCover.jpeg", ["Fantasy", "Adventure"]),
+        new Book("Harry Potter", "css/images/HarryPotterCover.jpeg", ["Fantasy", "Adventure"]),
+        new Book("All The Bright Places", "css/images/AllTheBrightPlacesCover.jpeg", ["Romance", "Young Adult"]),
+    new Book("The Selection", "css/images/TheSelectionCover.jpg", ["Romance", "Fiction"]),
+        new Book("Heartstopper", "css/images/HeartstopperCover.jpeg", ["Romance", "Graphic Novel"]),
+        new Book("The Seven Husbands of Evelyn Hugo", "css/images/TheSevenHusbandsOfEvelynHugoCover.jpeg", ["Historical", "Romance"]),
+        new Book("Today Tonight Tomorrow", "css/images/TodayTonightTomorrowCover.jpeg", ["Romance", "Young Adult"]),
+        new Book("The Cruel Prince", "css/images/TheCruelPrinceCover.jpeg", ["Fantasy", "Adventure"]),
 
-    new Book("Book Lovers13", "css/images/BookLoversCover.jpeg", ["Romance", "Fiction"]),
-    new Book("We Were Liars14", "css/images/WeWereLiarsCover.jpeg", ["Mystery", "Young Adult"]),
-    new Book("The Great Gatsby15", "css/images/TheGreatGatsbyCover.jpeg", ["Classic", "Fiction"]),
-    new Book("The Summer I Turned Pretty16", "css/images/TheSummerITurnedPrettyCover.jpg", ["Romance", "Young Adult"]),
-    new Book("Fourth Wing17", "css/images/FourthWingCover.jpeg", ["Fantasy", "Adventure"]),
-    new Book("Harry Potter18", "css/images/HarryPotterCover.jpeg", ["Fantasy", "Adventure"]),
-    new Book("All The Bright Places19", "css/images/AllTheBrightPlacesCover.jpeg", ["Romance", "Young Adult"]),
-    new Book("From Lukov With Love20", "css/images/FromLukovWithLoveCover.jpeg", ["Romance", "Fiction"])
+        new Book("Before We Were Strangers", "css/images/BeforeWeWereStrangersCover.jpeg", ["Romance", "Fiction"]),
+        new Book("Better Than The Movies", "css/images/BetterThanTheMoviesCover.jpeg", ["Mystery", "Young Adult"]),
+        new Book("Shatter Me", "css/images/ShatterMeCover.jpeg", ["Classic", "Fiction"]),
+    new Book("The Naturals", "css/images/TheNaturalsCover.jpg", ["Romance", "Young Adult"]),
+    new Book("Happy Place", "css/images/HappyPlaceCover.jpg", ["Fantasy", "Adventure"]),
+    new Book("The Lightning Thief", "css/images/TheLightningThiefCover.jpg", ["Fantasy", "Adventure"]),
+    new Book("A Court of Thorns and Roses", "css/images/ACourtOfThornsAndRosesCover.jpg", ["Romance", "Young Adult"]),
+    new Book("The Outsiders", "css/images/TheOutsidersCover.jpg", ["Romance", "Fiction"])
 ];
 
 // Function to display books
@@ -69,7 +69,7 @@ function displayBooks() {
  
          // Append image and title to the book container
          bookDiv.appendChild(img);
-         bookDiv.appendChild(title);
+        // bookDiv.appendChild(title);
  
          // Append the book container to the grid
          bookGrid.appendChild(bookDiv);
