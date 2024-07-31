@@ -1,3 +1,5 @@
+//Variables
+count = 0;
 
 // Book constructor function
 function Book(title, imagePath, genres) {
@@ -40,16 +42,42 @@ function handleBookClick(book, img) {
     // Check if the book is already in the selectedBooks array
     const index = selectedBooks.indexOf(book);
 
+    // Clear the current displayed book title
+    const bookTitleElement = document.getElementById("selectedBookTitle");
+    if (bookTitleElement) {
+        bookTitleElement.remove();
+    }
+
+    //Add book title above for now
+    const bookTitle = document.createElement("p");
+    bookTitle.id = "selectedBookTitle";
+    bookTitle.classList.add("p-2"); // Adds the .p-2 class to the paragraph element
+
     if (index === -1) {
         // Book is not in the array, add it
+        count += 1;
         selectedBooks.push(book);
         // Add box shadow to the book image when clicked
         img.style.boxShadow = '0 0 15px 12px lightskyblue';
+
+
+        bookTitle.textContent = book.title + " was added!";
+        document.querySelector(".div-2").appendChild(bookTitle);
+        //bookTitle.textContent = book.title;
     } else {
         // Book is in the array, remove it
         selectedBooks.splice(index, 1);
         // Remove box shadow from the book image when clicked again
         img.style.boxShadow = 'none';
+        count -= 1;
+        
+        if(count === 0){
+            bookTitle.textContent = "";
+        }
+        else{
+        bookTitle.textContent = book.title + " was removed.";
+        document.querySelector(".div-2").appendChild(bookTitle);
+    }
     }
 
     // Optionally log the list of selected books to the console for debugging
@@ -60,6 +88,7 @@ function handleBookClick(book, img) {
         selectedTitles.push(selectedBook.title);
     }
     console.log('Selected Books:', selectedTitles);
+    console.log('Count:', count);
 }
 
 // Function to display books
