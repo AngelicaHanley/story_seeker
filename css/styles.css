@@ -19,11 +19,7 @@ body {
   border-radius: 50%;
   border: 10px double #FFFFFF;
 }
-h0 {
-  font-size:20px;
-  color:black;
-  margin:10px;
-}
+
 /*Styling element instead of specific class*/
 h1 {
   font-size:100px;
@@ -34,11 +30,6 @@ h1 {
 font-size:30px;
 color: white;
 }
-
-.p-2 {
-  font-size:20px;
-  color: rgb(0, 115, 186); 
-  }
 
 /*Comment: this will change all hyperlinked text to have this color*/
 .link-style {
@@ -56,58 +47,57 @@ padding:40px;
 margin:0;
 text-align:center;
 }
-/* add code */
+
 .div-2 {
   background-color: rgb(235, 248, 251);
   height:40px; 
   padding:15px;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center; 
+  position: relative; /*Allows positioning for our child elements*/
 }
-/* Styling for book container */
-#book-container {
+
+#selectedBookTitle {
+  flex-grow: 1; 
+  text-align: center;
+  margin-left: auto; /*Pushes the title to the center */
+  margin-right: auto; /*Pushes the title to the center */
+  font-size:20px;
+  color: rgb(0, 115, 186); 
+}
+
+#bookCount {
+  margin-left: auto;
+  font-size:20px;
+  color: rgb(0, 115, 186); 
+}
+
+.title-wrapper {
+  flex: 1;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 10px;
-  background-color: rgb(235, 248, 251);
-  min-height: 500px;
+  justify-content: center; 
+  position: absolute; /*Take it out of the normal flow*/
+  left: 0;
+  right: 0;
 }
+
 .book img {
   max-width: 60%; /* Adjust to make books smaller ! ! !*/
-  border-radius: 8px; /* Rounded corners for the image */
-}
-/*
-.book {
-  margin: 10px;
-  text-align: center;
-  border: 1px solid #ccc;
-  padding: 10px;
-  background-color: white;
   border-radius: 8px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-} */
-
-.book-cover {
-  width: 150px;
-  height: auto;
-  display: block;
-  margin: 0 auto 10px;
 }
-/* Styling for book title */
+
 .book p {
-  /* margin: 10px 0 0; Margin for the book title 
-  font-size: 16px;  Font size for book title 
-  color: #333;  Dark gray text color */
   display: none; /* not displaying book title anymore */
 }
+
 .book {
-  margin: 2px; /* Add margin for a little space between books */
+  margin: 2px; /* Add margin for a little space between books, boxes underneath */
   text-align: center;
   border: none;
   background-color: transparent;
 }
+
 /* Container for the Book Grid */
 .book-grid {
   display: grid;
