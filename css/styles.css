@@ -9,31 +9,33 @@ body {
 /*Top div class*/
 .div-1 {
   background-color: lightskyblue;
-  height:480px; 
-  padding-top:80px;
+  height:300px; 
+  padding-top:10px;
+  padding-bottom:10px;
   text-align:center;
 }
 /*Top header profile image*/
 .profile-small {
-  height:150px;
+  height:140px;
   border-radius: 50%;
   border: 10px double #FFFFFF;
 }
 
 /*Styling element instead of specific class*/
 h1 {
-  font-size:100px;
+  font-size:60px;
   color:white;
-  margin:10px;
+  margin:5px;
 }
 .p-1 {
-font-size:30px;
+font-size:20px;
 color: white;
+margin:8px;
 }
 
 /*Comment: this will change all hyperlinked text to have this color*/
 .link-style {
-  font-size:20px;
+  font-size:15px;
   color: rgb(0, 115, 186); 
 }
 footer {
@@ -50,8 +52,8 @@ text-align:center;
 
 .div-2 {
   background-color: rgb(235, 248, 251);
-  height:40px; 
-  padding:15px;
+  height:30px; 
+  padding:10px;
   display: flex;
   justify-content: space-between;
   align-items: center; 
