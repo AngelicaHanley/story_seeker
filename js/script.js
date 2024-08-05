@@ -1,3 +1,4 @@
+//Book Constructor Function - defines book object
 function Book(title, imagePath, genres) {
     this.title = title;
     this.imagePath = imagePath;
@@ -6,7 +7,7 @@ function Book(title, imagePath, genres) {
     this.genres = genres;
 }
 
-//Array of book objects
+//Array of book objects, intializes each book
 let books = [
     new Book("Book Lovers", "css/images/BookLoversCover.jpeg", ["Romance", "Fiction"]),
     new Book("We Were Liars", "css/images/WeWereLiarsCover.jpeg", ["Mystery", "Young Adult"]),
@@ -30,46 +31,44 @@ let books = [
     new Book("A Court of Thorns and Roses", "css/images/ACourtOfThornsAndRosesCover.jpg", ["Fantasy", "New Adult"]),
     new Book("The Outsiders", "css/images/TheOutsidersCover.jpg", ["Classic", "Fiction"])
 ];
-
+//Initializing empty array and count
 let selectedBooks = [];
 let count = 0;
 
-//Function for book click
+//Function for book click, parameters are the book clicked and img
 function handleBookClick(book, img) {
-    //Checks if the book is already in the selectedBooks array
-    const index = selectedBooks.indexOf(book); //If the item is not found it returns -1
+    //Checks if the clicked book is already in the selectedBooks array
+    const index = selectedBooks.indexOf(book); //if book is not found, it returns -1
 
-    //Gets the current book title element
+    //Gets the current book title element from the html file then we update it
     const bookTitleElement = document.getElementById("selectedBookTitle");
 
-    //Clears the current displayed book title
+    //Removes the current displayed book title from selectedBookTitle span element in html
     if (bookTitleElement) {
         bookTitleElement.textContent = "";
     }
 
-    //Creates a new book title element
+    //Creates a new book title element, updates it based on if the book is being added/removed
     const bookTitle = document.createElement("p");
     bookTitle.id = "selectedBookTitle";
- //bookTitle.classList.add("p-2");
 
-    //if (index === -1 && count <= 10) {
     if (index === -1) {
-        //If book is not in array, add it in
-        count += 1;
-        selectedBooks.push(book);
-        img.style.boxShadow = '0 0 15px 12px lightskyblue';
-        bookTitle.textContent = book.title + " was added!";
+        //Checks if the bookshelf is full
+        if (count === 10) {
+            bookTitle.textContent = "Bookshelf is full!!!";
+        } else {
+            //If book is not in the array, add it
+            count += 1;
+            selectedBooks.push(book);
+            img.style.boxShadow = '0 0 15px 12px lightskyblue';
+            bookTitle.textContent = book.title + " was added!";
+        }
     } else {
-        //Book is in the array so, we remove it
+        //Book is in the array so, remove it
         selectedBooks.splice(index, 1);
         img.style.boxShadow = 'none';
         count -= 1;
-       if(count === 0){
-        bookTitle.textContent = "";
-        }
-        else{
         bookTitle.textContent = book.title + " was removed.";
-        } 
     }
 
     //Updating the book title on screen
@@ -95,7 +94,7 @@ function handleBookClick(book, img) {
 //Function to display the books!
 function displayBooks() {
     const bookGrid = document.getElementById("bookGrid");
- 
+//For each book in array, creates a div with an img element and p for the title
      books.forEach(book => {
          //Creating a div for each book
          const bookDiv = document.createElement("div");

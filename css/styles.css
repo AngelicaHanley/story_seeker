@@ -53,7 +53,7 @@ text-align:center;
 .div-2 {
   background-color: rgb(235, 248, 251);
   height:30px; 
-  padding:10px;
+  padding:5px;
   display: flex;
   justify-content: space-between;
   align-items: center; 
@@ -105,6 +105,20 @@ text-align:center;
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* 5 columns */
   grid-gap: 5px; /* Space between grid items */
-  padding: 20px; /* Padding around the grid from edges*/
+  padding: 5px; /* Padding around the grid from edges*/
   grid-row-gap: 30px; /* Additional vertical space between rows */
+}
+
+.next-button {
+  height:70px;
+}
+
+/*Top div class*/
+.div-3 {
+  display: flex;
+  justify-content: center; /* Horizontally center the button */
+  align-items: center; /* Vertically center the button */
+  background-color: rgb(235, 248, 251);
+  height:70px; 
+  padding:5px;
 }
