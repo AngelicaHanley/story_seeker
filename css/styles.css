@@ -110,7 +110,10 @@ text-align:center;
 }
 
 .next-button {
-  height:70px;
+  /* height:70px */
+  height:10%;
+  width: 100px;
+
 }
 
 /*Top div class*/
