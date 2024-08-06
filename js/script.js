@@ -18,11 +18,14 @@ let books = [
     new Book("All The Bright Places", "css/images/AllTheBrightPlacesCover.jpeg", ["Romance", "Young Adult"]),
     new Book("The Selection", "css/images/TheSelectionCover.jpg", ["Romance", "Young Adult"]),
     new Book("Heartstopper", "css/images/HeartstopperCover.jpeg", ["Romance", "Graphic Novel"]),
-    new Book("The Seven Husbands of Evelyn Hugo", "css/images/TheSevenHusbandsOfEvelynHugoCover.jpeg", ["Historical", "Contemporary"]),
+
+    new Book("Pride and Prejudice", "css/images/PrideandPrejudice.jpg", ["Historical", "Classic"]),
+
     new Book("Today Tonight Tomorrow", "css/images/TodayTonightTomorrowCover.jpeg", ["Romance", "Young Adult"]),
     new Book("The Cruel Prince", "css/images/TheCruelPrinceCover.jpeg", ["Fantasy", "Young Adult"]),
 
-    new Book("Before We Were Strangers", "css/images/BeforeWeWereStrangersCover.jpeg", ["Romance", "Contemporary"]),
+    new Book("The Hunger Games", "css/images/TheHungerGames.jpg", ["Fantasy", "Science Fiction"]),
+
     new Book("Better Than The Movies", "css/images/BetterThanTheMoviesCover.jpeg", ["Romance", "Young Adult"]),
     new Book("Shatter Me", "css/images/ShatterMeCover.jpeg", ["Dystopia", "Young Adult"]),
     new Book("The Naturals", "css/images/TheNaturalsCover.jpg", ["Mystery", "Thriller"]),
@@ -55,7 +58,7 @@ function handleBookClick(book, img) {
     if (index === -1) {
         //Checks if the bookshelf is full
         if (count === 10) {
-            bookTitle.textContent = "Bookshelf is full!!!";
+            bookTitle.textContent = "Bookshelf is full!";
         } else {
             //If book is not in the array, add it
             count += 1;
@@ -84,14 +87,14 @@ function handleBookClick(book, img) {
     if (bookCountElement) {
         bookCountElement.textContent = "Count: " + count + "/10";
     }
+    displayButton();
 
     //Writing debugging logs
     let selectedTitles = selectedBooks.map(selectedBook => selectedBook.title);
     console.log('Selected Books:', selectedTitles);
-    console.log('Count:', count);
 }
 
-//Function to display the books!
+//Function to display the books and makes them interactive by attaching click event listeners
 function displayBooks() {
     const bookGrid = document.getElementById("bookGrid");
 //For each book in array, creates a div with an img element and p for the title
@@ -117,9 +120,88 @@ function displayBooks() {
          //Adding the click event listener to the book div
          bookDiv.addEventListener('click', () => {
              handleBookClick(book, img);
+             
          });
      });
  }
 
+ //Function to display the button and makes it interactive by attaching click event listeners
+ //Need to call this function every time count changes
+function displayButton() {
+    const nextButton = document.getElementById("next-button");
+    const buttonLink = document.querySelector(".div-3 a"); //Get the <a> element 
+
+    if (count === 10) {
+        nextButton.style.filter = 'grayscale(0%)'; // Button style for when the count is 10
+        buttonLink.href = "endScreen.html"; //adds link
+        buttonLink.style.pointerEvents = 'auto'; //makes sure the link is clickable
+        //CALL END GAME POINT FUNCTION HERE ! (I think)
+        totalPoints();
+    } else {
+        nextButton.style.filter = 'grayscale(100%)'; // Reset button style when count is not 10
+        buttonLink.href = "#"; //removes link
+        buttonLink.style.pointerEvents = 'none'; //disables clicking
+    }
+
+        }
+
+function totalPoints() {
+    //Creating main genres for user to be given their results as
+    //4. Science fiction (dystopian)
+    //Initializing genre array
+    let points = {
+        romance: 0, //1. Romance/contemporary/historical (usually has romance tbh)
+        mystery: 0, //2. Mystery/thriller/crime
+        fantasy: 0, //3. Fantasy
+        scifi: 0, //4. Science fiction (dystopian)
+        other: 0 //5. Other - reader of all traders (we'll give them this if no category has more than 5 or smtg)
+    };
+
+    //Creating arrays from the genres of books picked
+    let selectedGenres = selectedBooks.map(selectedBook => selectedBook.genres);
+    console.log('Selected Genres:', selectedGenres);
+
+      //Iterating through all the arrays in selectedGenres
+      selectedGenres.forEach(genresArray => {
+        genresArray.forEach(genre => {
+        //Iterating through each genre
+
+        if (genre === "Romance" || genre === "Contemporary") {
+            points.romance++;
+        } else if (genre === "Mystery" || genre === "Thriller" || genre === "Crime") {
+            points.mystery++;
+        } else if (genre === "Fantasy") {
+            points.fantasy++;
+        } else if (genre === "Science Fiction" || genre === "Dystopia") {
+            points.scifi++;
+        } else if (genre !== "Fiction" && genre !== "Young Adult" && genre!= "New Adult" && 
+            genre!= "Adult" && genre!= "Non Fiction") { //since these are too broad, they will not add points
+            points.other++;
+        }
+        });
+    });
+    console.log('Points:', points); 
+    //Seeing which genre has the most points!
+    //let mainGenre = "";
+    let tiedGenres = [];
+    let maxPoints = 0;
+    for (let genre in points) { //iterating through each index of genre in points
+        if (points[genre] > maxPoints) {
+            maxPoints = points[genre];
+         //   mainGenre = genre;
+            tiedGenres = [genre]; //we do this in case of a tie
+        } else if (points[genre] === maxPoints) {
+            tiedGenres.push(genre);
+        }
+    }
+    //In case of a tie, we randomly choose one of the users top genres
+    //IMP: could add later what their secondary genre was
+let mainGenre = tiedGenres[Math.floor(Math.random() * tiedGenres.length)];
+    console.log('Main Genre:', mainGenre);
+// Calculate and store the result so we can use in other js file
+localStorage.setItem('endGameResult', mainGenre);
+}
+
 // Call the function to display books when the page loads!!
 displayBooks();
+displayButton();

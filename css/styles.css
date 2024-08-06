@@ -116,11 +116,10 @@ text-align:center;
   margin: 0 auto; /* Center the grid horizontally */
 }
 
-.next-button {
+#next-button {
   /* height:70px */
   height:10%;
   width: 100px;
-
 }
 
 /*Button div class*/
@@ -130,6 +129,13 @@ text-align:center;
   align-items: center; /* Vertically center the button */
   background-color: rgb(235, 248, 251);
   height:70px; 
-  padding-top:0px;
-  padding-bottom:10px;
+  padding-top:10px;
+  padding-bottom:20px;
 }
+/*End game text*/
+#end-game-result {
+  color:rgb(0, 115, 186); 
+  font-size:30px;
+  padding:20px;
+  text-align:center;
+  }
