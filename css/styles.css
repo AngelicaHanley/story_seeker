@@ -52,7 +52,7 @@ text-align:center;
 
 .div-2 {
   background-color: rgb(235, 248, 251);
-  height:30px; 
+  height:40px; 
   padding:5px;
   display: flex;
   justify-content: space-between;
@@ -84,20 +84,24 @@ text-align:center;
   right: 0;
 }
 
-.book img {
-  max-width: 60%; /* Adjust to make books smaller ! ! !*/
-  border-radius: 8px;
-}
-
 .book p {
   display: none; /* not displaying book title anymore */
 }
 
 .book {
-  margin: 2px; /* Add margin for a little space between books, boxes underneath */
-  text-align: center;
+  display: flex; /* Use flex to center the content */
+  justify-content: center; /* Horizontally center the content */
+  align-items: center; /* Vertically center the content */
+  margin: 0; /* Remove any margin that might affect spacing */
   border: none;
   background-color: transparent;
+}
+
+.book img {
+  max-width: 100px;  /* Adjust to make books smaller ! ! !*/
+  width: 70%; /* Make the image change to its container */
+  height: auto; 
+  border-radius: 8px;
 }
 
 /* Container for the Book Grid */
@@ -105,8 +109,11 @@ text-align:center;
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* 5 columns */
   grid-gap: 5px; /* Space between grid items */
-  padding: 5px; /* Padding around the grid from edges*/
+  padding-top:20px;
+  padding-bottom:10px;
   grid-row-gap: 30px; /* Additional vertical space between rows */
+  max-width: 700px;  /* Adjust to make books smaller ! ! !*/
+  margin: 0 auto; /* Center the grid horizontally */
 }
 
 .next-button {
@@ -116,12 +123,13 @@ text-align:center;
 
 }
 
-/*Top div class*/
+/*Button div class*/
 .div-3 {
   display: flex;
   justify-content: center; /* Horizontally center the button */
   align-items: center; /* Vertically center the button */
   background-color: rgb(235, 248, 251);
   height:70px; 
-  padding:5px;
+  padding-top:0px;
+  padding-bottom:10px;
 }
