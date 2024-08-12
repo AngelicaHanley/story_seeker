@@ -118,8 +118,8 @@ text-align:center;
   max-height: 525px;
   /*margin: 0 auto;  Center the grid horizontally */
   margin: 0 auto; /* Center the grid horizontally */
-  padding-left: 10px; /* Add extra space on the left */
-  padding-right: 10px; /* Add extra space on the right */
+  padding-left: 30px; /* Add extra space on the left */
+  padding-right: 30px; /* Add extra space on the right */
 }
 
 #next-button {
