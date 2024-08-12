@@ -116,7 +116,10 @@ text-align:center;
   max-width: 700px;  /* Adjust to make books smaller ! ! !*/
   overflow-y: scroll; /* Change to auto, to get rid of scroll bar only when needed*/
   max-height: 525px;
+  /*margin: 0 auto;  Center the grid horizontally */
   margin: 0 auto; /* Center the grid horizontally */
+  padding-left: 10px; /* Add extra space on the left */
+  padding-right: 10px; /* Add extra space on the right */
 }
 
 #next-button {
