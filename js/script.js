@@ -1,40 +1,17 @@
 //Book Constructor Function - defines book object
-function Book(title, imagePath, genres) {
+function Book(title, genres, rating, imagePath, goodreadsURL) {
     this.title = title;
+    this.genres = genres;
+    this.rating = rating;
     this.imagePath = imagePath;
+    this.goodreadsURL = goodreadsURL;
     this.bookClicked = false;
     this.frameVisible = false;
-    this.genres = genres;
 }
 
-//Array of book objects, intializes each book
-let books = [
-    new Book("Book Lovers", "css/images/BookLoversCover.jpeg", ["Romance", "Fiction"]),
-    new Book("We Were Liars", "css/images/WeWereLiarsCover.jpeg", ["Mystery", "Young Adult"]),
-    new Book("The Great Gatsby", "css/images/TheGreatGatsbyCover.jpeg", ["Classic", "Fiction"]),
-    new Book("The Summer I Turned Pretty", "css/images/TheSummerITurnedPrettyCover.jpg", ["Romance", "Young Adult"]),
-    new Book("Fourth Wing", "css/images/FourthWingCover.jpeg", ["Fantasy", "Romance"]),
-    new Book("Harry Potter", "css/images/HarryPotterCover.jpeg", ["Fantasy", "Fiction"]),
-    new Book("All The Bright Places", "css/images/AllTheBrightPlacesCover.jpeg", ["Romance", "Young Adult"]),
-    new Book("The Selection", "css/images/TheSelectionCover.jpg", ["Romance", "Young Adult"]),
-    new Book("Heartstopper", "css/images/HeartstopperCover.jpeg", ["Romance", "Graphic Novel"]),
+//Array to store book objects, that are loaded dynamically from the CSV file
+let books = [];
 
-    new Book("Pride and Prejudice", "css/images/PrideandPrejudice.jpg", ["Historical", "Classic"]),
-
-    new Book("Today Tonight Tomorrow", "css/images/TodayTonightTomorrowCover.jpeg", ["Romance", "Young Adult"]),
-    new Book("The Cruel Prince", "css/images/TheCruelPrinceCover.jpeg", ["Fantasy", "Young Adult"]),
-
-    new Book("The Hunger Games", "css/images/TheHungerGames.jpg", ["Fantasy", "Science Fiction"]),
-
-    new Book("Better Than The Movies", "css/images/BetterThanTheMoviesCover.jpeg", ["Romance", "Young Adult"]),
-    new Book("Shatter Me", "css/images/ShatterMeCover.jpeg", ["Dystopia", "Young Adult"]),
-    new Book("The Naturals", "css/images/TheNaturalsCover.jpg", ["Mystery", "Thriller"]),
-    new Book("Happy Place", "css/images/HappyPlaceCover.jpg", ["Romance", "Contemporary"]),
-    new Book("The Lightning Thief", "css/images/TheLightningThiefCover.jpg", ["Fantasy", "Young Adult"]),
-    new Book("A Court of Thorns and Roses", "css/images/ACourtOfThornsAndRosesCover.jpg", ["Fantasy", "New Adult"]),
-    new Book("The Outsiders", "css/images/TheOutsidersCover.jpg", ["Classic", "Fiction"])
-];
-//Initializing empty array and count
 let selectedBooks = [];
 let count = 0;
 
@@ -96,9 +73,19 @@ function handleBookClick(book, img) {
 
 //Function to display the books and makes them interactive by attaching click event listeners
 function displayBooks() {
+    console.log('Books array in displayBooks:', books);
     const bookGrid = document.getElementById("bookGrid");
+    bookGrid.innerHTML = ''; // Clear existing books
 //For each book in array, creates a div with an img element and p for the title
-     books.forEach(book => {
+//the slice ONLY lets us do the first 30 books but can change and, WILL change later to random
+    books.slice(0, 30).forEach(book => {
+
+        console.log(`Title: ${book.title}`);
+        console.log(`Genres: ${book.genres}`);
+        console.log(`Rating: ${book.rating}`);
+        console.log(`Cover Img: ${book.imagePath}`);
+        console.log(`Book Link: ${book.bookLink}`);
+
          //Creating a div for each book
          const bookDiv = document.createElement("div");
          bookDiv.classList.add("book");
@@ -147,14 +134,14 @@ function displayButton() {
 
 function totalPoints() {
     //Creating main genres for user to be given their results as
-    //4. Science fiction (dystopian)
     //Initializing genre array
     let points = {
         romance: 0, //1. Romance/contemporary/historical (usually has romance tbh)
         mystery: 0, //2. Mystery/thriller/crime
         fantasy: 0, //3. Fantasy
         scifi: 0, //4. Science fiction (dystopian)
-        other: 0 //5. Other - reader of all traders (we'll give them this if no category has more than 5 or smtg)
+        educational: 0, //5. Educational ??? maybe change name
+        other: 0 //6. Other - reader of all traders (we'll give them this if no category has more than 5 or smtg)
     };
 
     //Creating arrays from the genres of books picked
@@ -174,6 +161,8 @@ function totalPoints() {
             points.fantasy++;
         } else if (genre === "Science Fiction" || genre === "Dystopia") {
             points.scifi++;
+        } else if (genre === "Classics" || genre === "Historical Fiction" || genre === "Biography" || genre === "Memoir") {
+            points.educational++;
         } else if (genre !== "Fiction" && genre !== "Young Adult" && genre!= "New Adult" && 
             genre!= "Adult" && genre!= "Non Fiction") { //since these are too broad, they will not add points
             points.other++;
@@ -202,6 +191,45 @@ let mainGenre = tiedGenres[Math.floor(Math.random() * tiedGenres.length)];
 localStorage.setItem('endGameResult', mainGenre);
 }
 
-// Call the function to display books when the page loads!!
-displayBooks();
-displayButton();
+async function loadBooksFromCSV(file) {
+    console.log("Loading CSV data from file:", file);
+
+    const response = await fetch(file);
+    const csvData = await response.text();
+
+    //Getting data from the rows
+    const rows = csvData.split('\n');
+
+    //Skip the header row!
+    for (let i = 1; i < rows.length; i++) {
+        const columns = rows[i].split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/); //Handles commas within quotes
+
+        if (columns.length < 5) continue; //Skips rows with missing columns (in case)
+
+        const title = columns[0].trim().replace(/^"|"$/g, ''); //Remove extra quotes
+        let genres = columns[1].trim().replace(/^"|"$/g, ''); //Remove extra quotes
+        const rating = columns[2].trim().replace(/^"|"$/g, '');
+        const imagePath = columns[3].trim().replace(/^"|"$/g, '');
+        const bookLink = columns[4].trim().replace(/^"|"$/g, '');
+
+        //Manually parse the genres to get the array
+        genres = genres
+            .replace(/^\['/, '') // Remove leading [' from genres
+            .replace(/'\]$/, '') // Remove trailing '] from genres
+            .split(/',\s*'/); // Split by ', ' or ', '
+
+        //Creates the book object!
+        const book = new Book(title, genres, parseFloat(rating), imagePath, bookLink);
+        books.push(book);
+    }
+    displayBooks();
+    console.log('Displaying Books!');
+    return books;
+}
+
+// Example usage
+window.onload = async () => {
+
+    loadBooksFromCSV('bookData.csv');
+    displayButton();
+};
