@@ -76,9 +76,25 @@ function displayBooks() {
     console.log('Books array in displayBooks:', books);
     const bookGrid = document.getElementById("bookGrid");
     bookGrid.innerHTML = ''; // Clear existing books
+
+    //Gets the first specific amount of books
+    const firstSpecificAmtBooks = books.slice(0, 1000);
+    //Set to track the unique random indices
+    const selectedIndices = new Set();
+    // Array to store the selected random books
+    const selectedBooks = [];
+
+    ///Gets the 30 unique random books, UPDATE IF I WANT MORE/LESS BOOKS ON SCREEN
+    while (selectedIndices.size < 20) {
+        const randomIndex = getRandomInt(0, 1000);
+        if (!selectedIndices.has(randomIndex)) {
+            selectedIndices.add(randomIndex);
+            selectedBooks.push(firstSpecificAmtBooks[randomIndex]);
+        }
+    }
+
 //For each book in array, creates a div with an img element and p for the title
-//the slice ONLY lets us do the first 30 books but can change and, WILL change later to random
-    books.slice(0, 30).forEach(book => {
+    selectedBooks.forEach(book => {
 
         console.log(`Title: ${book.title}`);
         console.log(`Genres: ${book.genres}`);
@@ -161,10 +177,10 @@ function totalPoints() {
             points.fantasy++;
         } else if (genre === "Science Fiction" || genre === "Dystopia") {
             points.scifi++;
-        } else if (genre === "Classics" || genre === "Historical Fiction" || genre === "Biography" || genre === "Memoir") {
+        } else if (genre === "Classics" || genre === "Historical Fiction" || genre === "Biography" || genre === "Memoir" || genre === "Philosophy") {
             points.educational++;
         } else if (genre !== "Fiction" && genre !== "Young Adult" && genre!= "New Adult" && 
-            genre!= "Adult" && genre!= "Non Fiction") { //since these are too broad, they will not add points
+            genre!= "Adult" && genre!= "Non Fiction" && genre!= "Childrens" && genre!="Picture Books" && genre!="Graphic Novels") { //since these are too broad, they will not add points
             points.other++;
         }
         });
@@ -225,6 +241,11 @@ async function loadBooksFromCSV(file) {
     displayBooks();
     console.log('Displaying Books!');
     return books;
+}
+
+//Function to get a random int b/w min and max 
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
 }
 
 // Example usage
