@@ -93,8 +93,8 @@ text-align:center;
   justify-content: center; /* Horizontally center the content */
   align-items: center; /* Vertically center the content */
   margin: 0; /* Remove any margin that might affect spacing */
-  border: none;
   background-color: transparent;
+  overflow: visible;
 }
 
 .book img {
@@ -102,10 +102,11 @@ text-align:center;
   width: 70%; /* Make the image change to its container */
   height: auto; 
   border-radius: 8px;
+  transition: box-shadow 0.3s ease;/* Fades it in I think? */
 }
 
-/* Container for the Book Grid */
-.book-grid {
+/* Container class for the Book Grid */
+#bookGrid.book-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* 5 columns */
   grid-gap: 5px; /* Space between grid items */
@@ -113,6 +114,8 @@ text-align:center;
   padding-bottom:10px;
   grid-row-gap: 30px; /* Additional vertical space between rows */
   max-width: 700px;  /* Adjust to make books smaller ! ! !*/
+  overflow-y: scroll; /* Change to auto, to get rid of scroll bar only when needed*/
+  max-height: 525px;
   margin: 0 auto; /* Center the grid horizontally */
 }
 

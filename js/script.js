@@ -40,7 +40,7 @@ function handleBookClick(book, img) {
             //If book is not in the array, add it
             count += 1;
             selectedBooks.push(book);
-            img.style.boxShadow = '0 0 15px 12px lightskyblue';
+            img.style.boxShadow = "0 0 15px 12px lightskyblue";
             bookTitle.textContent = book.title + " was added!";
         }
     } else {
@@ -74,7 +74,7 @@ function handleBookClick(book, img) {
 //Function to display the books and makes them interactive by attaching click event listeners
 function displayBooks() {
     console.log('Books array in displayBooks:', books);
-    const bookGrid = document.getElementById("bookGrid");
+    bookGrid = document.getElementById("bookGrid");
     bookGrid.innerHTML = ''; // Clear existing books
 
     //Gets the first specific amount of books
@@ -84,8 +84,8 @@ function displayBooks() {
     // Array to store the selected random books
     const selectedBooks = [];
 
-    ///Gets the 30 unique random books, UPDATE IF I WANT MORE/LESS BOOKS ON SCREEN
-    while (selectedIndices.size < 20) {
+    ///Gets the 1000 unique random books, UPDATE IF I WANT MORE/LESS BOOKS ON SCREEN
+    while (selectedIndices.size < 100) {
         const randomIndex = getRandomInt(0, 1000);
         if (!selectedIndices.has(randomIndex)) {
             selectedIndices.add(randomIndex);
@@ -102,28 +102,27 @@ function displayBooks() {
         console.log(`Cover Img: ${book.imagePath}`);
         console.log(`Book Link: ${book.bookLink}`);
 
-         //Creating a div for each book
-         const bookDiv = document.createElement("div");
-         bookDiv.classList.add("book");
+        //Creating a div for each book
+        bookDiv = document.createElement("div");
+        bookDiv.classList.add("book");
 
-          //Making image element
-          const img = document.createElement('img');
-          img.src = book.imagePath;
-          img.alt = book.title;
-  
-          //Then title element
-          const title = document.createElement('p');
-          title.textContent = book.title;
-  
-          //Then appending image and title to the book container
-          bookDiv.appendChild(img);
-          bookDiv.appendChild(title);
-          bookGrid.appendChild(bookDiv);
+        //NEEDED to always refer to the same image element throughout its scope
+        const img = document.createElement('img');
+        img.src = book.imagePath;
+        img.alt = book.title;
 
-         //Adding the click event listener to the book div
-         bookDiv.addEventListener('click', () => {
-             handleBookClick(book, img);
-             
+        //Then title element
+        const title = document.createElement('p');
+        title.textContent = book.title;
+
+        //Then appending image and title to the book container
+        bookDiv.appendChild(img);
+        bookDiv.appendChild(title);
+        bookGrid.appendChild(bookDiv);
+
+        //Adding the click event listener to the book div
+        bookDiv.addEventListener('click', () => {
+            handleBookClick(book, img);
          });
      });
  }
