@@ -105,7 +105,7 @@ text-align:center;
   transition: box-shadow 0.3s ease;/* Fades it in I think? */
 }
 
-/* Container class for the Book Grid */
+/* Container id for the Book Grid */
 #bookGrid.book-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* 5 columns */
@@ -120,6 +120,20 @@ text-align:center;
   margin: 0 auto; /* Center the grid horizontally */
   padding-left: 30px; /* Add extra space on the left */
   padding-right: 30px; /* Add extra space on the right */
+}
+
+#containerBelowGrid {
+  max-width: 700px;  /* Adjust to make books smaller ! ! !*/
+  max-height: 525px;
+  margin: 0 auto; /* Center horizontally */
+  padding-left: 30px; /* Add extra space on the left */
+  padding-right: 30px; /* Add extra space on the right */
+}
+
+#textBelowGrid {
+  font-size:15px;
+  color: rgb(0, 115, 186);
+  text-align: right;
 }
 
 #next-button {
