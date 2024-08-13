@@ -52,36 +52,36 @@ text-align:center;
 
 .div-2 {
   background-color: rgb(235, 248, 251);
-  height:40px; 
-  padding:5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center; 
+  min-height:40px; 
+  padding-top:5px;
+  /*justify-content: space-between;*/
   position: relative; /*Allows positioning for our child elements*/
+  width: 100%; /* Ensure the container takes up the full width of its parent */
 }
 
 #selectedBookTitle {
-  flex-grow: 1; 
-  text-align: center;
-  margin-left: auto; /*Pushes the title to the center */
-  margin-right: auto; /*Pushes the title to the center */
+  /*flex-grow: 1; */
+  text-align: center; 
+  /*margin-left: auto; Pushes the title to the center */
+  /*margin-right: auto; Pushes the title to the center */
   font-size:20px;
   color: rgb(0, 115, 186); 
+  margin-bottom: 5px; /* Space between title and count */
+  word-wrap: break-word; /* Ensure long words will break and wrap onto the next line */
+  overflow-wrap: break-word; /* Support for older browsers */
+  white-space: normal; /* Allow text to wrap normally */
+  width: 100%; /* Make sure the title takes up the full width of the container */
 }
 
 #bookCount {
-  margin-left: auto;
-  font-size:20px;
+  /*margin-left: auto;*/
+  font-size:17px;
   color: rgb(0, 115, 186); 
-}
-
-.title-wrapper {
-  flex: 1;
-  display: flex;
-  justify-content: center; 
-  position: absolute; /*Take it out of the normal flow*/
-  left: 0;
-  right: 0;
+  padding:5px;
+  text-align: right; /* Align count to the right */
+  margin: 0px;
+  /* position: absolute; /* Position the count absolutely within the container 
+  right: 0; /* Align it to the right edge of the container */
 }
 
 .book p {
@@ -122,12 +122,13 @@ text-align:center;
   padding-right: 30px; /* Add extra space on the right */
 }
 
-#containerBelowGrid {
-  max-width: 700px;  /* Adjust to make books smaller ! ! !*/
+#containerAroundGrid {
+  max-width: 700px;  
   max-height: 525px;
+  min-height: 17px;
   margin: 0 auto; /* Center horizontally */
-  padding-left: 30px; /* Add extra space on the left */
-  padding-right: 30px; /* Add extra space on the right */
+  padding-left: 30px; 
+  padding-right: 30px; 
 }
 
 #textBelowGrid {

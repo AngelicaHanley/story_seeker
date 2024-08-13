@@ -103,6 +103,7 @@ function displayBooks() {
             book.genres.includes("Religious") || 
             book.genres.includes("Short Stories")|| 
             book.genres.includes("Childrens") || book.genres.length === 0) {
+            //book.generes.includes("[]")
                 continue;
             }
             //Adds the book if it doesn't get skipped b/c of above
@@ -126,6 +127,7 @@ function displayBooks() {
 
         console.log(`Title: ${book.title}`);
         console.log(`Genres: ${book.genres}`);
+
         console.log(`Rating: ${book.rating}`);
         console.log(`Cover Img: ${book.imagePath}`);
         console.log(`Book Link: ${book.bookLink}`);
