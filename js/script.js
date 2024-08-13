@@ -78,20 +78,48 @@ function displayBooks() {
     bookGrid.innerHTML = ''; // Clear existing books
 
     //Gets the first specific amount of books
-    const firstSpecificAmtBooks = books.slice(0, 1000);
+    const firstSpecificAmtBooks = books.slice(0, 2000);
     //Set to track the unique random indices
     const selectedIndices = new Set();
     // Array to store the selected random books
     const selectedBooks = [];
 
-    ///Gets the 1000 unique random books, UPDATE IF I WANT MORE/LESS BOOKS ON SCREEN
-    while (selectedIndices.size < 100) {
-        const randomIndex = getRandomInt(0, 1000);
+    console.log("About to get books!");
+    while (selectedBooks.length < 100 && selectedIndices.size < 1500) {
+        console.log("GETTING BOOKS!");
+        const randomIndex = getRandomInt(0, 1500);
+        if (!selectedIndices.has(randomIndex)) {
+            const book = firstSpecificAmtBooks[randomIndex];
+          //  console.log("!Genres:! ", book.genres);
+    
+            //Checks if the book should be skipped depending on the title
+            if (book.title.includes("Complete") || book.title.includes("Series") || 
+            book.title.includes("Collection") || book.title.includes("Draft") || book.title.includes("Box Set") ||
+            book.title === "Title not found") {
+                continue; //Skips this book!
+            }
+     
+            if (book.genres.includes("Nonfiction") || book.genres.includes("Picture Books") || 
+            book.genres.includes("Religious") || 
+            book.genres.includes("Short Stories")|| 
+            book.genres.includes("Childrens") || book.genres.length === 0) {
+                continue;
+            }
+            //Adds the book if it doesn't get skipped b/c of above
+            selectedIndices.add(randomIndex);
+            selectedBooks.push(book);
+        }
+    }
+
+
+    ///Gets 100 random books from the first 2000 books, UPDATE IF I WANT MORE/LESS BOOKS ON SCREEN
+   /* while (selectedIndices.size < 100) {
+        const randomIndex = getRandomInt(0, 2000); //picks random indexes
         if (!selectedIndices.has(randomIndex)) {
             selectedIndices.add(randomIndex);
             selectedBooks.push(firstSpecificAmtBooks[randomIndex]);
         }
-    }
+    } */
 
 //For each book in array, creates a div with an img element and p for the title
     selectedBooks.forEach(book => {
@@ -172,7 +200,7 @@ function totalPoints() {
             points.romance++;
         } else if (genre === "Mystery" || genre === "Thriller" || genre === "Crime") {
             points.mystery++;
-        } else if (genre === "Fantasy") {
+        } else if (genre === "Fantasy" || genre === "Vampires" || genre === "Paranormal") {
             points.fantasy++;
         } else if (genre === "Science Fiction" || genre === "Dystopia") {
             points.scifi++;
