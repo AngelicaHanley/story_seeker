@@ -95,7 +95,7 @@ function displayBooks() {
             //Checks if the book should be skipped depending on the title
             if (book.title.includes("Complete") || book.title.includes("Series") || 
             book.title.includes("Collection") || book.title.includes("Draft") || book.title.includes("Box Set") ||
-            book.title === "Title not found") {
+            book.title.includes("Trilogy") || book.title === "Title not found") {
                 continue; //Skips this book!
             }
      

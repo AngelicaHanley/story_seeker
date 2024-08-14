@@ -54,34 +54,18 @@ text-align:center;
   background-color: rgb(235, 248, 251);
   min-height:40px; 
   padding-top:5px;
-  /*justify-content: space-between;*/
-  position: relative; /*Allows positioning for our child elements*/
-  width: 100%; /* Ensure the container takes up the full width of its parent */
+  width: 100%; /*Makes sure the container takes up the full width of its parent */
 }
 
 #selectedBookTitle {
-  /*flex-grow: 1; */
   text-align: center; 
-  /*margin-left: auto; Pushes the title to the center */
-  /*margin-right: auto; Pushes the title to the center */
   font-size:20px;
   color: rgb(0, 115, 186); 
-  margin-bottom: 5px; /* Space between title and count */
-  word-wrap: break-word; /* Ensure long words will break and wrap onto the next line */
-  overflow-wrap: break-word; /* Support for older browsers */
-  white-space: normal; /* Allow text to wrap normally */
-  width: 100%; /* Make sure the title takes up the full width of the container */
-}
-
-#bookCount {
-  /*margin-left: auto;*/
-  font-size:17px;
-  color: rgb(0, 115, 186); 
-  padding:5px;
-  text-align: right; /* Align count to the right */
-  margin: 0px;
-  /* position: absolute; /* Position the count absolutely within the container 
-  right: 0; /* Align it to the right edge of the container */
+  margin-bottom: 5px; 
+  word-wrap: break-word; /*Makes sure long words will break and wrap onto the next line */
+  overflow-wrap: break-word; 
+  white-space: normal;
+  width: 100%; 
 }
 
 .book p {
@@ -92,7 +76,7 @@ text-align:center;
   display: flex; /* Use flex to center the content */
   justify-content: center; /* Horizontally center the content */
   align-items: center; /* Vertically center the content */
-  margin: 0; /* Remove any margin that might affect spacing */
+  margin: 0; /* Removes any margin that might mess up spacing */
   background-color: transparent;
   overflow: visible;
 }
@@ -102,7 +86,7 @@ text-align:center;
   width: 70%; /* Make the image change to its container */
   height: auto; 
   border-radius: 8px;
-  transition: box-shadow 0.3s ease;/* Fades it in I think? */
+  transition: box-shadow 0.3s ease;/* Fades shadow in! */
 }
 
 /* Container id for the Book Grid */
@@ -110,35 +94,58 @@ text-align:center;
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* 5 columns */
   grid-gap: 5px; /* Space between grid items */
-  padding-top:20px;
+  padding-top:10px;
   padding-bottom:10px;
   grid-row-gap: 30px; /* Additional vertical space between rows */
   max-width: 700px;  /* Adjust to make books smaller ! ! !*/
-  overflow-y: scroll; /* Change to auto, to get rid of scroll bar only when needed*/
+  overflow-y: scroll;
   max-height: 525px;
-  /*margin: 0 auto;  Center the grid horizontally */
   margin: 0 auto; /* Center the grid horizontally */
-  padding-left: 30px; /* Add extra space on the left */
-  padding-right: 30px; /* Add extra space on the right */
+  padding-left: 30px; 
+  padding-right: 30px; 
 }
 
-#containerAroundGrid {
+.containerAroundGrid {
   max-width: 700px;  
   max-height: 525px;
   min-height: 17px;
-  margin: 0 auto; /* Center horizontally */
+  margin: 0 auto; 
   padding-left: 30px; 
   padding-right: 30px; 
+}
+
+.containerFlex {
+  display: flex; /* Uses flexbox layout */
+  justify-content: space-between; /* Makes space between items */
+}
+
+#bookCount {
+  /*margin-left: auto;*/
+  font-size:17px;
+  color: rgb(0, 115, 186); 
+  text-align: right; 
+  margin: 0px;
+  padding-right: 30px;
+  line-height: 1.5;
+}
+
+#textAboveGrid {
+  font-size:15px;
+  color: rgb(0, 115, 186);
+  text-align: left;
+  margin: 0px; 
+  padding-left: 20px;
+  line-height: 1.5;
 }
 
 #textBelowGrid {
   font-size:15px;
   color: rgb(0, 115, 186);
   text-align: right;
+  padding-right: 30px; 
 }
 
 #next-button {
-  /* height:70px */
   height:10%;
   width: 100px;
 }
