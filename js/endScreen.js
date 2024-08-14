@@ -7,4 +7,17 @@ function displayResults() {
     }
 }
 
+function genres() {
+    const selectedGenreBookTitles = localStorage.getItem('selectedGenreBookTitles');
+    const bookRecsElement = document.getElementById('bookRecsElement');
+
+    //Build a single string and combine it at once!
+    console.log(selectedGenreBookTitles);
+    let printTitles = selectedGenreBookTitles.replace(/,/g, ', ');
+ //   if (selectedGenreBookTitles && bookRecsElement) {
+        bookRecsElement.textContent = "Your Book Recs: " + printTitles;
+   // }
+}
+
 displayResults();
+genres()

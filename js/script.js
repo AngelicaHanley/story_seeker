@@ -73,23 +73,23 @@ function handleBookClick(book, img) {
 
 //Function to display the books and makes them interactive by attaching click event listeners
 function displayBooks() {
-    console.log('Books array in displayBooks:', books);
+
+    //console.log('Books array in displayBooks:', books);
     bookGrid = document.getElementById("bookGrid");
     bookGrid.innerHTML = ''; // Clear existing books
 
     //Gets the first specific amount of books
-    const firstSpecificAmtBooks = books.slice(0, 2000);
+    const specificAmtBooks = books.slice(0, 2000);
     //Set to track the unique random indices
     const selectedIndices = new Set();
-    // Array to store the selected random books
+    //Array to store the selected random books
     const selectedBooks = [];
 
-    console.log("About to get books!");
+    //console.log("About to get books!");
     while (selectedBooks.length < 100 && selectedIndices.size < 1500) {
-        console.log("GETTING BOOKS!");
         const randomIndex = getRandomInt(0, 1500);
         if (!selectedIndices.has(randomIndex)) {
-            const book = firstSpecificAmtBooks[randomIndex];
+            const book = specificAmtBooks[randomIndex];
           //  console.log("!Genres:! ", book.genres);
     
             //Checks if the book should be skipped depending on the title
@@ -110,17 +110,7 @@ function displayBooks() {
             selectedIndices.add(randomIndex);
             selectedBooks.push(book);
         }
-    }
-
-
-    ///Gets 100 random books from the first 2000 books, UPDATE IF I WANT MORE/LESS BOOKS ON SCREEN
-   /* while (selectedIndices.size < 100) {
-        const randomIndex = getRandomInt(0, 2000); //picks random indexes
-        if (!selectedIndices.has(randomIndex)) {
-            selectedIndices.add(randomIndex);
-            selectedBooks.push(firstSpecificAmtBooks[randomIndex]);
-        }
-    } */
+    } 
 
 //For each book in array, creates a div with an img element and p for the title
     selectedBooks.forEach(book => {
@@ -181,12 +171,12 @@ function totalPoints() {
     //Creating main genres for user to be given their results as
     //Initializing genre array
     let points = {
-        romance: 0, //1. Romance/contemporary/historical (usually has romance tbh)
-        mystery: 0, //2. Mystery/thriller/crime
-        fantasy: 0, //3. Fantasy
-        scifi: 0, //4. Science fiction (dystopian)
-        educational: 0, //5. Educational ??? maybe change name
-        other: 0 //6. Other - reader of all traders (we'll give them this if no category has more than 5 or smtg)
+        Romance: 0, //1. Romance/contemporary/historical (usually has romance tbh)
+        Mystery: 0, //2. Mystery/thriller/crime
+        Fantasy: 0, //3. Fantasy
+        scienceFiction: 0, //4. Science fiction (dystopian)
+        Classics: 0, //5. Educational ??? maybe change name
+        Other: 0 //6. Other - reader of all traders (we'll give them this if no category has more than 5 or smtg)
     };
 
     //Creating arrays from the genres of books picked
@@ -199,30 +189,28 @@ function totalPoints() {
         //Iterating through each genre
 
         if (genre === "Romance" || genre === "Contemporary") {
-            points.romance++;
+            points.Romance++;
         } else if (genre === "Mystery" || genre === "Thriller" || genre === "Crime") {
-            points.mystery++;
+            points.Mystery++;
         } else if (genre === "Fantasy" || genre === "Vampires" || genre === "Paranormal") {
-            points.fantasy++;
+            points.Fantasy++;
         } else if (genre === "Science Fiction" || genre === "Dystopia") {
-            points.scifi++;
+            points.scienceFiction++;
         } else if (genre === "Classics" || genre === "Historical Fiction" || genre === "Biography" || genre === "Memoir" || genre === "Philosophy") {
-            points.educational++;
+            points.Classics++;
         } else if (genre !== "Fiction" && genre !== "Young Adult" && genre!= "New Adult" && 
             genre!= "Adult" && genre!= "Non Fiction" && genre!= "Childrens" && genre!="Picture Books" && genre!="Graphic Novels") { //since these are too broad, they will not add points
-            points.other++;
+            points.Other++;
         }
         });
     });
     console.log('Points:', points); 
     //Seeing which genre has the most points!
-    //let mainGenre = "";
     let tiedGenres = [];
     let maxPoints = 0;
     for (let genre in points) { //iterating through each index of genre in points
         if (points[genre] > maxPoints) {
             maxPoints = points[genre];
-         //   mainGenre = genre;
             tiedGenres = [genre]; //we do this in case of a tie
         } else if (points[genre] === maxPoints) {
             tiedGenres.push(genre);
@@ -234,10 +222,64 @@ let mainGenre = tiedGenres[Math.floor(Math.random() * tiedGenres.length)];
     console.log('Main Genre:', mainGenre);
 // Calculate and store the result so we can use in other js file
 localStorage.setItem('endGameResult', mainGenre);
+//here call the functio to get the top books in that genre !!!! IMP
+genreBookRecs(mainGenre);
+}
+
+function genreBookRecs(mainGenre){
+    console.log("Main Genre in FUNCTION: ", mainGenre);
+    //Gets the first specific amount of books
+    listCapacity = 200;
+    const specificAmtBooks = books.slice(0, listCapacity);
+    //Set to track the unique random indices
+    const mySelectedIndices = new Set();
+    //Array to store the selected random books
+    const selectedGenreBooks = [];
+
+    if(mainGenre == "scienceFiction"){
+        mainGenre == "Science Fiction";
+    }
+    else if (mainGenre == "Other"){
+        mainGenre = "Fiction"; //IMP: i am ignoring non-fiction for now, maybe change
+    }
+
+    while (selectedGenreBooks.length < 5 && mySelectedIndices.size < listCapacity ) {
+     
+        const myRandomIndex = getRandomInt(0, listCapacity-1);
+        if (!mySelectedIndices.has(myRandomIndex)){
+            const book = specificAmtBooks[myRandomIndex];
+
+            if(book.genres.includes(mainGenre))  
+                {
+                //Checks if the book should be skipped depending on the title
+                if (book.title.includes("Complete") || book.title.includes("Series") || 
+                book.title.includes("Collection") || book.title.includes("Draft") || book.title.includes("Box Set") ||
+                book.title.includes("Trilogy") || book.title === "Title not found") {
+                    continue; //Skips this book!
+                }
+        
+                if (book.genres.includes("Nonfiction") || book.genres.includes("Picture Books") || 
+                book.genres.includes("Religious") || 
+                book.genres.includes("Short Stories")|| 
+                book.genres.includes("Childrens") || book.genres.length === 0) {
+                    continue;
+                }
+            mySelectedIndices.add(myRandomIndex);
+            selectedGenreBooks.push(book);
+            }
+        }
+    } 
+    console.log(selectedGenreBooks);
+    localStorage.setItem('selectedGenreBooks', selectedGenreBooks);
+    
+    //Creating an array of the titles !
+    const titles = selectedGenreBooks.map(selectedGenreBooks => selectedGenreBooks.title);
+    console.log("titles array: ", titles);
+    localStorage.setItem('selectedGenreBookTitles', titles);
 }
 
 async function loadBooksFromCSV(file) {
-    console.log("Loading CSV data from file:", file);
+    //console.log("Loading CSV data from file:", file);
 
     const response = await fetch(file);
     const csvData = await response.text();
@@ -259,9 +301,9 @@ async function loadBooksFromCSV(file) {
 
         //Manually parse the genres to get the array
         genres = genres
-            .replace(/^\['/, '') // Remove leading [' from genres
-            .replace(/'\]$/, '') // Remove trailing '] from genres
-            .split(/',\s*'/); // Split by ', ' or ', '
+            .replace(/^\['/, '') // Removes leading [' from genres
+            .replace(/'\]$/, '') // Removes the trailing '] from genres
+            .split(/',\s*'/); // Splits it by ', ' or ', '
 
         //Creates the book object!
         const book = new Book(title, genres, parseFloat(rating), imagePath, bookLink);
@@ -272,7 +314,7 @@ async function loadBooksFromCSV(file) {
     return books;
 }
 
-//Function to get a random int b/w min and max 
+//Function to get a random int between min and max 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }

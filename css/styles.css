@@ -143,6 +143,7 @@ text-align:center;
   color: rgb(0, 115, 186);
   text-align: right;
   padding-right: 30px; 
+  margin-bottom: 0px;
 }
 
 #next-button {
@@ -156,14 +157,21 @@ text-align:center;
   justify-content: center; /* Horizontally center the button */
   align-items: center; /* Vertically center the button */
   background-color: rgb(235, 248, 251);
-  height:70px; 
-  padding-top:10px;
+  min-height:70px; 
+  padding-top:5px;
   padding-bottom:20px;
 }
 /*End game text*/
 #end-game-result {
   color:rgb(0, 115, 186); 
   font-size:30px;
+  padding:20px;
+  text-align:center;
+  }
+/*END GAME Book Recs!*/
+#bookRecsElement {
+  color:rgb(0, 115, 186); 
+  font-size:15px;
   padding:20px;
   text-align:center;
   }
