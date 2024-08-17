@@ -90,7 +90,7 @@ text-align:center;
 }
 
 /* Container id for the Book Grid */
-#bookGrid.book-grid {
+#bookGrid {
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* 5 columns */
   grid-gap: 5px; /* Space between grid items */

@@ -9,14 +9,77 @@ function Book(title, genres, rating, imagePath, goodreadsURL) {
     this.frameVisible = false;
 }
 
-//Array to store book objects, that are loaded dynamically from the CSV file
-let books = [];
+class bookManagerClass {
+    constructor() {
+        this._selectedGenreBooks = [];
+        this._mainGenre = '';
+    }
 
+get selectedGenreBooks() {
+    return this._selectedGenreBooks;
+}
+
+set selectedGenreBooks(value) {
+    if (Array.isArray(value)) {
+        this._selectedGenreBooks = value;
+    }
+}
+
+
+//Setter
+set mainGenre(genre) {
+    this._mainGenre = genre;
+}
+
+//Getter
+get mainGenre() {
+    return this._mainGenre;
+}
+}
+
+const bookManager = new bookManagerClass();
+
+//global vars
 let selectedBooks = [];
 let count = 0;
+let books = []; //MAIN ARRAY INITALIZED
+let myGlobalVariable = '';
 
-//Function for book click, parameters are the book clicked and img
-function handleBookClick(book, img) {
+async function loadBooksFromCSV(file) {
+
+    const response = await fetch(file);
+    const csvData = await response.text();
+
+    //Getting data from the rows
+    const rows = csvData.split('\n');
+
+    //Skip the header row!
+    for (let i = 1; i < rows.length; i++) {
+        const columns = rows[i].split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/); //Handles commas within quotes
+
+        if (columns.length < 5) continue; //Skips rows with missing columns (in case)
+
+        const title = columns[0].trim().replace(/^"|"$/g, ''); //Remove extra quotes
+        let genres = columns[1].trim().replace(/^"|"$/g, ''); //Remove extra quotes
+        const rating = columns[2].trim().replace(/^"|"$/g, '');
+        const imagePath = columns[3].trim().replace(/^"|"$/g, '');
+        const bookLink = columns[4].trim().replace(/^"|"$/g, '');
+
+        //Manually parse the genres to get the array
+        genres = genres
+            .replace(/^\['/, '') // Removes leading [' from genres
+            .replace(/'\]$/, '') // Removes the trailing '] from genres
+            .split(/',\s*'/); // Splits it by ', ' or ', '
+
+        //Creates the book object!
+        const book = new Book(title, genres, parseFloat(rating), imagePath, bookLink);
+        books.push(book);
+    }
+    console.log('Displaying Books!');
+    return books;
+}
+
+function handleBookClick(book, img, books) {
     //Checks if the clicked book is already in the selectedBooks array
     const index = selectedBooks.indexOf(book); //if book is not found, it returns -1
 
@@ -33,18 +96,24 @@ function handleBookClick(book, img) {
     bookTitle.id = "selectedBookTitle";
 
     if (index === -1) {
+        
         //Checks if the bookshelf is full
-        if (count === 10) {
-            bookTitle.textContent = "Bookshelf is full!";
-        } else {
+        if (count < 10) {
             //If book is not in the array, add it
-            count += 1;
             selectedBooks.push(book);
             img.style.boxShadow = "0 0 15px 12px lightskyblue";
             bookTitle.textContent = book.title + " was added!";
+            console.log("Count tracker!: ", count);   
+            count += 1;
+        } 
+        if (count == 10){
+            bookTitle.textContent = "Bookshelf is full!";
+            console.log("END GAME Count: ",count);
+            totalPoints(); //add up genre points
+            genreBookRecs(books); //get the 5 genre bookRecs !
         }
     } else {
-        //Book is in the array so, remove it
+        //Book is already in the array (clicked again) so, remove it
         selectedBooks.splice(index, 1);
         img.style.boxShadow = 'none';
         count -= 1;
@@ -64,18 +133,24 @@ function handleBookClick(book, img) {
     if (bookCountElement) {
         bookCountElement.textContent = "Count: " + count + "/10";
     }
-    displayButton();
-
-    //Writing debugging logs
+    //Debugging
     let selectedTitles = selectedBooks.map(selectedBook => selectedBook.title);
     console.log('Selected Books:', selectedTitles);
+
+    displayButton(); //update display button after every click
 }
 
 //Function to display the books and makes them interactive by attaching click event listeners
 function displayBooks() {
 
-    //console.log('Books array in displayBooks:', books);
-    bookGrid = document.getElementById("bookGrid");
+    let bookGrid = document.getElementById("bookGrid");
+    console.log('bookGrid:', bookGrid);
+
+    if (!bookGrid) {
+        console.error('Element with ID "bookGrid" not found');
+        return;
+    }
+
     bookGrid.innerHTML = ''; // Clear existing books
 
     //Gets the first specific amount of books
@@ -83,15 +158,13 @@ function displayBooks() {
     //Set to track the unique random indices
     const selectedIndices = new Set();
     //Array to store the selected random books
-    const selectedBooks = [];
+    const gridBooks = [];
 
-    //console.log("About to get books!");
-    while (selectedBooks.length < 100 && selectedIndices.size < 1500) {
+    while (gridBooks.length < 100 && selectedIndices.size < 1500) {
         const randomIndex = getRandomInt(0, 1500);
         if (!selectedIndices.has(randomIndex)) {
             const book = specificAmtBooks[randomIndex];
-          //  console.log("!Genres:! ", book.genres);
-    
+  
             //Checks if the book should be skipped depending on the title
             if (book.title.includes("Complete") || book.title.includes("Series") || 
             book.title.includes("Collection") || book.title.includes("Draft") || book.title.includes("Box Set") ||
@@ -103,17 +176,17 @@ function displayBooks() {
             book.genres.includes("Religious") || 
             book.genres.includes("Short Stories")|| 
             book.genres.includes("Childrens") || book.genres.length === 0) {
-            //book.generes.includes("[]")
+            //book.generes.includes("[]") IMP!!! FIX
                 continue;
             }
             //Adds the book if it doesn't get skipped b/c of above
             selectedIndices.add(randomIndex);
-            selectedBooks.push(book);
+            gridBooks.push(book);
         }
     } 
 
 //For each book in array, creates a div with an img element and p for the title
-    selectedBooks.forEach(book => {
+    gridBooks.forEach(book => {
 
         console.log(`Title: ${book.title}`);
         console.log(`Genres: ${book.genres}`);
@@ -123,10 +196,10 @@ function displayBooks() {
         console.log(`Book Link: ${book.bookLink}`);
 
         //Creating a div for each book
-        bookDiv = document.createElement("div");
+        let bookDiv = document.createElement("div");
         bookDiv.classList.add("book");
 
-        //NEEDED to always refer to the same image element throughout its scope
+        //NEEDED const to always refer to the same image element throughout its scope
         const img = document.createElement('img');
         img.src = book.imagePath;
         img.alt = book.title;
@@ -142,13 +215,14 @@ function displayBooks() {
 
         //Adding the click event listener to the book div
         bookDiv.addEventListener('click', () => {
-            handleBookClick(book, img);
+            handleBookClick(book, img, books);
          });
      });
- }
+    return gridBooks; //all books on the grid
+}
 
- //Function to display the button and makes it interactive by attaching click event listeners
- //Need to call this function every time count changes
+//Function to display the button and makes it interactive by attaching click event listeners
+//Need to call this function every time count changes
 function displayButton() {
     const nextButton = document.getElementById("next-button");
     const buttonLink = document.querySelector(".div-3 a"); //Get the <a> element 
@@ -157,14 +231,11 @@ function displayButton() {
         nextButton.style.filter = 'grayscale(0%)'; // Button style for when the count is 10
         buttonLink.href = "endScreen.html"; //adds link
         buttonLink.style.pointerEvents = 'auto'; //makes sure the link is clickable
-        //CALL END GAME POINT FUNCTION HERE ! (I think)
-        totalPoints();
-    } else {
+    } else if(count < 10){
         nextButton.style.filter = 'grayscale(100%)'; // Reset button style when count is not 10
         buttonLink.href = "#"; //removes link
         buttonLink.style.pointerEvents = 'none'; //disables clicking
     }
-
         }
 
 function totalPoints() {
@@ -217,39 +288,34 @@ function totalPoints() {
         }
     }
     //In case of a tie, we randomly choose one of the users top genres
-    //IMP: could add later what their secondary genre was
-let mainGenre = tiedGenres[Math.floor(Math.random() * tiedGenres.length)];
-    console.log('Main Genre:', mainGenre);
-// Calculate and store the result so we can use in other js file
-localStorage.setItem('endGameResult', mainGenre);
-//here call the functio to get the top books in that genre !!!! IMP
-genreBookRecs(mainGenre);
+    //IMP!!! : could add later what their secondary top genre was
+bookManager.mainGenre = tiedGenres[Math.floor(Math.random() * tiedGenres.length)];
+console.log('Updated Main Genre:', bookManager.mainGenre);
 }
 
-function genreBookRecs(mainGenre){
-    console.log("Main Genre in FUNCTION: ", mainGenre);
+function genreBookRecs(books){
+    console.log("Main Genre in FUNCTION: ", bookManager.mainGenre);
     //Gets the first specific amount of books
-    listCapacity = 200;
+    let listCapacity = 200;
     const specificAmtBooks = books.slice(0, listCapacity);
     //Set to track the unique random indices
     const mySelectedIndices = new Set();
-    //Array to store the selected random books
-    const selectedGenreBooks = [];
 
-    if(mainGenre == "scienceFiction"){
-        mainGenre == "Science Fiction";
+    if(bookManager.mainGenre == "scienceFiction"){
+        bookManager.mainGenre = "Science Fiction";
     }
-    else if (mainGenre == "Other"){
-        mainGenre = "Fiction"; //IMP: i am ignoring non-fiction for now, maybe change
-    }
-
-    while (selectedGenreBooks.length < 5 && mySelectedIndices.size < listCapacity ) {
+    else if (bookManager.mainGenre == "Other"){
+        bookManager.mainGenre = "Fiction"; //IMP!!!: i am ignoring non-fiction for now, maybe change
+    } //ACTUALLY I AM THINKING, if "other" then your top genres will just be 5 random books from the top books?
+    //OR maybe just do it so you can 1 random book that has each of these genres + non-ficiton
+    console.log("Main Genre in FUNCTION again: ", bookManager.mainGenre);
+    while (bookManager.selectedGenreBooks.length < 5 && mySelectedIndices.size < listCapacity ) {
      
         const myRandomIndex = getRandomInt(0, listCapacity-1);
         if (!mySelectedIndices.has(myRandomIndex)){
             const book = specificAmtBooks[myRandomIndex];
 
-            if(book.genres.includes(mainGenre))  
+            if(book.genres.includes(bookManager.mainGenre))  
                 {
                 //Checks if the book should be skipped depending on the title
                 if (book.title.includes("Complete") || book.title.includes("Series") || 
@@ -265,53 +331,17 @@ function genreBookRecs(mainGenre){
                     continue;
                 }
             mySelectedIndices.add(myRandomIndex);
-            selectedGenreBooks.push(book);
+            bookManager.selectedGenreBooks.push(book);
             }
         }
     } 
-    console.log(selectedGenreBooks);
-    localStorage.setItem('selectedGenreBooks', selectedGenreBooks);
-    
-    //Creating an array of the titles !
-    const titles = selectedGenreBooks.map(selectedGenreBooks => selectedGenreBooks.title);
-    console.log("titles array: ", titles);
-    localStorage.setItem('selectedGenreBookTitles', titles);
-}
+    console.log("Selected Genre Books in script: ",bookManager.selectedGenreBooks);
+    //setting items to use in other JS files!
+    localStorage.setItem("mainGenre", JSON.stringify(bookManager.mainGenre)); //Convert to a string to store
+    console.log("LOCAL: ",bookManager.mainGenre);
 
-async function loadBooksFromCSV(file) {
-    //console.log("Loading CSV data from file:", file);
-
-    const response = await fetch(file);
-    const csvData = await response.text();
-
-    //Getting data from the rows
-    const rows = csvData.split('\n');
-
-    //Skip the header row!
-    for (let i = 1; i < rows.length; i++) {
-        const columns = rows[i].split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/); //Handles commas within quotes
-
-        if (columns.length < 5) continue; //Skips rows with missing columns (in case)
-
-        const title = columns[0].trim().replace(/^"|"$/g, ''); //Remove extra quotes
-        let genres = columns[1].trim().replace(/^"|"$/g, ''); //Remove extra quotes
-        const rating = columns[2].trim().replace(/^"|"$/g, '');
-        const imagePath = columns[3].trim().replace(/^"|"$/g, '');
-        const bookLink = columns[4].trim().replace(/^"|"$/g, '');
-
-        //Manually parse the genres to get the array
-        genres = genres
-            .replace(/^\['/, '') // Removes leading [' from genres
-            .replace(/'\]$/, '') // Removes the trailing '] from genres
-            .split(/',\s*'/); // Splits it by ', ' or ', '
-
-        //Creates the book object!
-        const book = new Book(title, genres, parseFloat(rating), imagePath, bookLink);
-        books.push(book);
-    }
-    displayBooks();
-    console.log('Displaying Books!');
-    return books;
+    localStorage.setItem("selectedGenreBooks", JSON.stringify(bookManager.selectedGenreBooks));
+    console.log("LOCAL: ",bookManager.selectedGenreBooks);
 }
 
 //Function to get a random int between min and max 
@@ -319,9 +349,19 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
-// Example usage
-window.onload = async () => {
 
-    loadBooksFromCSV('bookData.csv');
-    displayButton();
-};
+//Codeed it so it only works on the first screen
+if (window.location.pathname === '/index.html') {
+
+document.addEventListener('DOMContentLoaded', async function () {
+    try {
+        console.log("Trying code!");
+        displayButton();
+        books = await loadBooksFromCSV('bookData.csv');
+        const gridBooks = displayBooks();
+        console.log(gridBooks);
+    } catch (error) {
+        console.error('Error loading books:', error);
+    }
+});
+}

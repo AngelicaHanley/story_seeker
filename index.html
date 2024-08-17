@@ -11,32 +11,32 @@
 </head>
 <!--Body section--> 
 <body>
-<!--Div 1--> 
+<!--Div 1-->
 <div class="div-1">
 <img src="css/images/small-profile.jpg" class="profile-small" alt="Image of blue vintage books logo.">
 <h1>Story Seeker</h1>
 <p class="p-1"><em>Angelica Hanley's Personal Project</em></p>
 <a href="about.html" class="link-style">About this site | </a>
 <a href="practice.html" class="link-style">Practice</a>
-</div><!--Closed div here--> 
+</div><!--Closed div here-->
 
-<div class="div-2"> <!--Container--> 
-  <p id="selectedBookTitle"></p>
-  </div>
-  <div class="containerAroundGrid containerFlex"> 
-    <p id="textAboveGrid">Refresh for new books!</p> 
-    <p id="bookCount"></p>
-  </div>
-  
-<div class="book-grid" id="bookGrid">
+<div class="div-2">
+  <p id="selectedBookTitle">Click on books to add them to your bookshelf!</p>
 </div>
+<div class="containerAroundGrid containerFlex">
+    <p id="textAboveGrid">Refresh for new books</p>
+    <p id="bookCount"></p>
+</div>
+  
+<!--<div class="book-grid" id="bookGrid">-->
+<div id="bookGrid"></div>
 
 <div class="containerAroundGrid">
-  <p id="textBelowGrid">Scroll for more!</p> 
+  <p id="textBelowGrid">Scroll for more!</p>
 </div>
 
-<div class="div-3"> <!--Container for button--> 
-<a href="#"> <!--Makes link unclickable for now, until updated by javascript-->
+<div class="div-3">
+<a href="#"><!--Makes link unclickable for now, until updated by javascript-->
 <img src="css/images/next-button.png" id="next-button" alt="Image of light blue next button.">
 </a>
 </div>
@@ -46,7 +46,7 @@
     <h2>Contact Me: hanleyangelica@ufl.edu</h2>
 </footer>
 
-<script src="js/script.js"></script>
+<script type="module" src="js/script.js" defer></script>
 </body>
 
-</html> <!--ENDING HTML tag saying that all above is in html code--> 
+</html><!--ENDING HTML tag saying that all above is in html code--> 

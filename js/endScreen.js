@@ -1,23 +1,32 @@
 
-function displayResults() {
-    const endGameResult = localStorage.getItem('endGameResult');
-    const resultElement = document.getElementById('end-game-result');
-    if (endGameResult && resultElement) {
-        resultElement.textContent = "Your Result: " + endGameResult + "!";
-    }
+
+if (window.location.pathname === '/endScreen.html') {
+
+   document.addEventListener('DOMContentLoaded', function () {
+
+        //Displaying genre result
+        const resultElement = document.getElementById('end-game-result');
+        const retrievedMainGenre = JSON.parse(localStorage.getItem("mainGenre")); // Convert back to array
+        console.log("LOCAL: ", retrievedMainGenre);
+        resultElement.textContent = "Your Result: " + retrievedMainGenre + "!";
+
+        //Displaying 5 book recs result
+        const bookRecsElement = document.getElementById('bookRecsElement');
+        const retrievedSelectedGenreBooks = JSON.parse(localStorage.getItem("selectedGenreBooks")); // Convert back to array
+        console.log("LOCAL: ", retrievedSelectedGenreBooks);
+
+        bookRecsElement.textContent = "Your Book Recs: ";
+        
+        const genreBookTitles = retrievedSelectedGenreBooks.map(book => book.title);
+        for (let i = 0; i < retrievedSelectedGenreBooks.length; i++) {
+            if(i<=3){
+            console.log(retrievedSelectedGenreBooks[i].title);
+            bookRecsElement.textContent += retrievedSelectedGenreBooks[i].title + ", ";
+        } else{
+            bookRecsElement.textContent += retrievedSelectedGenreBooks[i].title;
+        }
+        }
+
+    });
 }
 
-function genres() {
-    const selectedGenreBookTitles = localStorage.getItem('selectedGenreBookTitles');
-    const bookRecsElement = document.getElementById('bookRecsElement');
-
-    //Build a single string and combine it at once!
-    console.log(selectedGenreBookTitles);
-    let printTitles = selectedGenreBookTitles.replace(/,/g, ', ');
- //   if (selectedGenreBookTitles && bookRecsElement) {
-        bookRecsElement.textContent = "Your Book Recs: " + printTitles;
-   // }
-}
-
-displayResults();
-genres()
