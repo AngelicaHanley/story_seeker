@@ -193,7 +193,7 @@ function displayBooks() {
 
         console.log(`Rating: ${book.rating}`);
         console.log(`Cover Img: ${book.imagePath}`);
-        console.log(`Book Link: ${book.bookLink}`);
+        console.log(`Book Link: ${book.goodreadsURL}`);
 
         //Creating a div for each book
         let bookDiv = document.createElement("div");
@@ -204,13 +204,9 @@ function displayBooks() {
         img.src = book.imagePath;
         img.alt = book.title;
 
-        //Then title element
-        const title = document.createElement('p');
-        title.textContent = book.title;
-
         //Then appending image and title to the book container
         bookDiv.appendChild(img);
-        bookDiv.appendChild(title);
+        //bookDiv.appendChild(title);
         bookGrid.appendChild(bookDiv);
 
         //Adding the click event listener to the book div

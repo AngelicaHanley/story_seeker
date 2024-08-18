@@ -6,6 +6,7 @@ body {
     padding: 0;
     box-sizing: border-box;
   }
+
 /*Top div class*/
 .div-1 {
   background-color: lightskyblue;
@@ -68,10 +69,6 @@ text-align:center;
   width: 100%; 
 }
 
-.book p {
-  display: none; /* not displaying book title anymore */
-}
-
 .book {
   display: flex; /* Use flex to center the content */
   justify-content: center; /* Horizontally center the content */
@@ -97,7 +94,7 @@ text-align:center;
   padding-top:10px;
   padding-bottom:10px;
   grid-row-gap: 30px; /* Additional vertical space between rows */
-  max-width: 700px;  /* Adjust to make books smaller ! ! !*/
+  max-width: 800px;  /* Adjust to make books smaller ! ! !*/
   overflow-y: scroll;
   max-height: 525px;
   margin: 0 auto; /* Center the grid horizontally */
@@ -161,6 +158,9 @@ text-align:center;
   padding-top:5px;
   padding-bottom:20px;
 }
+
+/*!END SCREEN STYLES!*/
+
 /*End game text*/
 #end-game-result {
   color:rgb(0, 115, 186); 
@@ -175,3 +175,51 @@ text-align:center;
   padding:20px;
   text-align:center;
   }
+
+#endGameGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 columns */
+  grid-gap: 20px; /* Space between grid items */
+  padding-top:10px;
+  padding-bottom:10px;
+  max-width: 800px;  /* Adjust to make books smaller ! ! !*/
+  margin: 0 auto; /* Center the grid horizontally */
+  padding-left: 10px; 
+  padding-right: 10px;
+}
+
+.bookText {
+  max-width: 150px; 
+  width: 100%; /* Make the image change to its container */
+  height: auto;
+  color: rgb(0, 115, 186);
+  text-align:center;
+  justify-self: center;
+  font-size:14px;
+  margin-top: 5px;
+}
+/* endScreen book container images' style */
+.bookContainer img {
+  width: 100%; /* Make the image change to its container */
+  align-self: center;
+  justify-self: center;
+}
+/* endScreen book container style */
+.bookContainer {
+  display: grid;
+  align-content: flex-start;
+  max-width: 150px;  /* Adjust to make books smaller ! ! !*/
+  height: auto; 
+  border-radius: 8px;
+}
+/* endScreen <a> class (for book img to send you to GoodReads link)*/
+
+.bookLink {
+  display: grid;
+  align-items: center;
+  max-width: 150px;  /* Adjust to make books smaller ! ! !*/
+  height: auto; 
+  border-radius: 8px;
+  justify-self: center;
+  align-self: center;
+}
