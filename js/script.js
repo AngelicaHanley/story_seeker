@@ -164,21 +164,12 @@ function displayBooks() {
         const randomIndex = getRandomInt(0, 1500);
         if (!selectedIndices.has(randomIndex)) {
             const book = specificAmtBooks[randomIndex];
-  
-            //Checks if the book should be skipped depending on the title
-            if (book.title.includes("Complete") || book.title.includes("Series") || 
-            book.title.includes("Collection") || book.title.includes("Draft") || book.title.includes("Box Set") ||
-            book.title.includes("Trilogy") || book.title === "Title not found") {
-                continue; //Skips this book!
-            }
-     
-            if (book.genres.includes("Nonfiction") || book.genres.includes("Picture Books") || 
-            book.genres.includes("Religious") || 
-            book.genres.includes("Short Stories")|| 
-            book.genres.includes("Childrens") || book.genres.length === 0) {
-            //book.generes.includes("[]") IMP!!! FIX
-                continue;
-            }
+        
+            //if function returns true, then continue (so skip the book)
+            if (refiningBooks(book)) {
+                continue; 
+            } 
+
             //Adds the book if it doesn't get skipped b/c of above
             selectedIndices.add(randomIndex);
             gridBooks.push(book);
@@ -305,27 +296,30 @@ function genreBookRecs(books){
     } //ACTUALLY I AM THINKING, if "other" then your top genres will just be 5 random books from the top books?
     //OR maybe just do it so you can 1 random book that has each of these genres + non-ficiton
     console.log("Main Genre in FUNCTION again: ", bookManager.mainGenre);
+
+    // Function to check if a book's title exists in selectedBooks array
+    function isBookTitleSelected(title) {
+        return selectedBooks.some(book => book.title === title);
+    } //returns true if a book's title matches any title in our selectedBooks array
+
     while (bookManager.selectedGenreBooks.length < 5 && mySelectedIndices.size < listCapacity ) {
      
         const myRandomIndex = getRandomInt(0, listCapacity-1);
         if (!mySelectedIndices.has(myRandomIndex)){
             const book = specificAmtBooks[myRandomIndex];
 
-            if(book.genres.includes(bookManager.mainGenre))  
-                {
-                //Checks if the book should be skipped depending on the title
-                if (book.title.includes("Complete") || book.title.includes("Series") || 
-                book.title.includes("Collection") || book.title.includes("Draft") || book.title.includes("Box Set") ||
-                book.title.includes("Trilogy") || book.title === "Title not found") {
-                    continue; //Skips this book!
+            if(book.genres.includes(bookManager.mainGenre)) {
+
+                //Checks if the book's title is already in selectedBooks
+                if (isBookTitleSelected(book.title)) {
+                    continue; //Skip the book if the function returns true (i.e. book is in array)
                 }
-        
-                if (book.genres.includes("Nonfiction") || book.genres.includes("Picture Books") || 
-                book.genres.includes("Religious") || 
-                book.genres.includes("Short Stories")|| 
-                book.genres.includes("Childrens") || book.genres.length === 0) {
-                    continue;
-                }
+
+                            //if function returns true, then continue (so skip the book)
+                if (refiningBooks(book)) {
+                    continue; 
+                } 
+
             mySelectedIndices.add(myRandomIndex);
             bookManager.selectedGenreBooks.push(book);
             }
@@ -338,6 +332,27 @@ function genreBookRecs(books){
 
     localStorage.setItem("selectedGenreBooks", JSON.stringify(bookManager.selectedGenreBooks));
     console.log("LOCAL: ",bookManager.selectedGenreBooks);
+}
+
+function refiningBooks(book){
+
+ //Checks if the book should be skipped depending on the title
+ if (book.title.includes("Complete") || book.title.includes("Series") || 
+ book.title.includes("Collection") || book.title.includes("Draft") || book.title.includes("Box Set") ||
+ book.title.includes("Trilogy") || book.title.includes("Boxed") || book.title === "Title not found") {
+     console.log("SKIPPING this book: ", book.title);
+     return true; //Skips this book!
+ }
+
+ if (book.genres.includes("Nonfiction") || book.genres.includes("Picture Books") || 
+ book.genres.includes("Religious") || 
+ book.genres.includes("Short Stories")|| 
+ book.genres.includes("Childrens") || book.genres.includes("[]")) {
+     console.log("SKIPPING this book: ", book.title, " with genres: ", book.genres);
+     return true;
+}    
+return false;
+
 }
 
 //Function to get a random int between min and max 
