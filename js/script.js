@@ -106,11 +106,13 @@ function handleBookClick(book, img, books) {
             console.log("Count tracker!: ", count);   
             count += 1;
         } 
-        if (count == 10){
+        if (count == 10){ //add end-game logic here
             bookTitle.textContent = "Bookshelf is full!";
             console.log("END GAME Count: ",count);
             totalPoints(); //add up genre points
             genreBookRecs(books); //get the 5 genre bookRecs !
+            allBookRecs(books);
+
         }
     } else {
         //Book is already in the array (clicked again) so, remove it
@@ -211,7 +213,7 @@ function displayBooks() {
 //Function to display the button and makes it interactive by attaching click event listeners
 //Need to call this function every time count changes
 function displayButton() {
-    const nextButton = document.getElementById("next-button");
+    const nextButton = document.getElementById("button");
     const buttonLink = document.querySelector(".div-3 a"); //Get the <a> element 
 
     if (count === 10) {
@@ -246,7 +248,7 @@ function totalPoints() {
         genresArray.forEach(genre => {
         //Iterating through each genre
 
-        if (genre === "Romance" || genre === "Contemporary") {
+        if (genre === "Romance" || genre === "Contemporary" || genre === "Contemporary Romance" || genre === "Historical Romance" || genre === "Paranormal Romance" || genre === "Fantasy Romance"|| genre === "Young Adult Romance" || genre === "Sports Romance") {
             points.Romance++;
         } else if (genre === "Mystery" || genre === "Thriller" || genre === "Crime") {
             points.Mystery++;
@@ -283,7 +285,7 @@ console.log('Updated Main Genre:', bookManager.mainGenre);
 function genreBookRecs(books){
     console.log("Main Genre in FUNCTION: ", bookManager.mainGenre);
     //Gets the first specific amount of books
-    let listCapacity = 200;
+    let listCapacity = 500; //only gives you 5 random book recs from the top 500 books (since they are the best rated ones!)
     const specificAmtBooks = books.slice(0, listCapacity);
     //Set to track the unique random indices
     const mySelectedIndices = new Set();
@@ -333,6 +335,49 @@ function genreBookRecs(books){
     localStorage.setItem("selectedGenreBooks", JSON.stringify(bookManager.selectedGenreBooks));
     console.log("LOCAL: ",bookManager.selectedGenreBooks);
 }
+
+
+function allBookRecs(books){
+
+    const allBookRecs = [];
+
+    if(bookManager.mainGenre == "scienceFiction"){
+        bookManager.mainGenre = "Science Fiction";
+    }
+    else if (bookManager.mainGenre == "Other"){
+        bookManager.mainGenre = "Fiction"; //IMP!!!: i am ignoring non-fiction for now, maybe change
+    } //ACTUALLY I AM THINKING, if "other" then your top genres will just be 5 random books from the top books?
+    //OR maybe just do it so you can 1 random book that has each of these genres + non-ficiton
+
+    // Function to check if a book's title exists in selectedBooks array
+    function isBookTitleSelected(title) {
+        return selectedBooks.some(book => book.title === title); 
+    } //returns true if a book's title matches any title in our selectedBooks array
+
+    for(let i = 0; i<books.length; i++){
+
+        if(books[i].genres.includes(bookManager.mainGenre)) {
+
+            //Checks if the book's title is already in selectedBooks
+            if (isBookTitleSelected(books[i].title)) {
+                console.log("Skipping book for now since was in 5 recs: ", books[i].title)
+                continue; //Skip the book if the function returns true (i.e. book is in array)
+                //potentially instead have it where if the book is in the array then it is like in a different font color
+            }
+
+            //if function returns true, then continue (so skip the book)
+            if (refiningBooks(books[i])) {
+                continue; 
+            } 
+           // console.log(books[i].title,", genres: ", books[i].genres);
+        allBookRecs.push(books[i]);
+        }
+    }
+    localStorage.setItem("allBookRecs", JSON.stringify(allBookRecs));
+    console.log("LOCAL: ",allBookRecs);
+    return allBookRecs;
+}
+
 
 function refiningBooks(book){
 

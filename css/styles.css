@@ -7,55 +7,69 @@ body {
     box-sizing: border-box;
   }
 
+a {
+  color: rgb(0, 115, 186);
+}
+
 /*Top div class*/
 .div-1 {
   background-color: lightskyblue;
-  height:300px; 
-  padding-top:10px;
-  padding-bottom:10px;
+  height: 32vw;
+  padding-top:1vw;
+  padding-bottom:1vw;
   text-align:center;
+  min-width: 300px;
+  min-height: 150px;
 }
 /*Top header profile image*/
 .profile-small {
-  height:140px;
+  height: 50%; /* 50% of the parent's size */
   border-radius: 50%;
   border: 10px double #FFFFFF;
 }
 
 /*Styling element instead of specific class*/
 h1 {
-  font-size:60px;
+  font-size: clamp(20px, 5vw, 80px);
   color:white;
-  margin:5px;
+  margin:1px;
 }
 .p-1 {
-font-size:20px;
+font-size: clamp(10px, 2.5vw, 80px);
 color: white;
-margin:8px;
+margin:1px;
 }
 
 /*Comment: this will change all hyperlinked text to have this color*/
 .link-style {
-  font-size:15px;
+  font-size: clamp(5px, 2vw, 80px);
   color: rgb(0, 115, 186); 
+  margin: 5px;
 }
 footer {
-  height:auto;
   background-color:lightskyblue;
+  height: 20vw;
+  padding-top:1vw;
+  padding-bottom:1vw;
+  text-align:center;
+  min-width: 300px;
+  min-height: 66px;
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
 }
 h2 {
 color:white;
-margin:10px;
-padding:40px;
-margin:0;
-text-align:center;
+margin:1px;
+font-size: clamp(15px, 4vw, 50px);
 }
 
 .div-2 {
   background-color: rgb(235, 248, 251);
   min-height:40px; 
   padding-top:5px;
-  width: 100%; /*Makes sure the container takes up the full width of its parent */
+  width: 100%; /*Makes sure it takes up the full width of its parent */
+  min-width: 300px;
 }
 
 #selectedBookTitle {
@@ -71,16 +85,16 @@ text-align:center;
 
 .book {
   display: flex; /* Use flex to center the content */
-  justify-content: center; /* Horizontally center the content */
-  align-items: center; /* Vertically center the content */
-  margin: 0; /* Removes any margin that might mess up spacing */
+  justify-content: center; 
+  align-items: center; 
+  margin: 0; /* Removes any margin that might mess up our spacing */
   background-color: transparent;
   overflow: visible;
 }
 
 .book img {
   max-width: 100px;  /* Adjust to make books smaller ! ! !*/
-  width: 70%; /* Make the image change to its container */
+  width: 70%; /* Makes the image change to its container */
   height: auto; 
   border-radius: 8px;
   transition: box-shadow 0.3s ease;/* Fades shadow in! */
@@ -90,10 +104,11 @@ text-align:center;
 #bookGrid {
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* 5 columns */
-  grid-gap: 5px; /* Space between grid items */
+  grid-gap: 5px; 
   padding-top:10px;
   padding-bottom:10px;
-  grid-row-gap: 30px; /* Additional vertical space between rows */
+  min-width: 300px;
+  grid-row-gap: 30px; /* MORE vertical space between rows */
   max-width: 800px;  /* Adjust to make books smaller ! ! !*/
   overflow-y: scroll;
   max-height: 525px;
@@ -105,6 +120,7 @@ text-align:center;
 .containerAroundGrid {
   max-width: 700px;  
   max-height: 525px;
+  min-width: 300px;
   min-height: 17px;
   margin: 0 auto; 
   padding-left: 30px; 
@@ -143,77 +159,84 @@ text-align:center;
   margin-bottom: 0px;
 }
 
-#next-button {
+#button {
   height:10%;
   width: 100px;
+  min-width: 60px;
 }
 
 /*Button div class*/
 .div-3 {
   display: flex;
-  justify-content: center; /* Horizontally center the button */
-  align-items: center; /* Vertically center the button */
+  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically center */
   background-color: rgb(235, 248, 251);
-  min-height:70px; 
-  padding-top:5px;
-  padding-bottom:20px;
+  min-height:70px;
+  padding: 1vw;
+  min-width: 300px;
 }
 
 /*!END SCREEN STYLES!*/
 
-/*End game text*/
+/*End game headers (used for top genre & spotify)*/
 #end-game-result {
   color:rgb(0, 115, 186); 
-  font-size:30px;
+  font-size: clamp(15px, 4.5vw, 30px);
   padding:20px;
-  text-align:center;
-  }
+  text-align:left;
+  margin: 0px;
+  width: 40%;
+}
 /*END GAME Book Recs!*/
 #bookRecsElement {
   color:rgb(0, 115, 186); 
-  font-size:15px;
+  font-size: clamp(10px, 2.5vw, 30px);
   padding:20px;
   text-align:center;
+  width: 60%;
   }
-
 #endGameGrid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5 columns */
-  grid-gap: 20px; /* Space between grid items */
-  padding-top:10px;
-  padding-bottom:10px;
-  max-width: 800px;  /* Adjust to make books smaller ! ! !*/
-  margin: 0 auto; /* Center the grid horizontally */
-  padding-left: 10px; 
-  padding-right: 10px;
+  grid-template-columns: repeat(5, 1fr); 
+  grid-gap: 3vw; 
+  padding:1vw;
+  max-width: 800px;  /* Adjust to make books max smaller ! ! !*/
+  margin: 0 auto;
+  /* ADDED BORDER */
+  border: 10px ridge lightskyblue;
+  border-radius: 8px;
+  min-width: 280px;
 }
-
 .bookText {
   max-width: 150px; 
-  width: 100%; /* Make the image change to its container */
+  width: 100%; /* Makes the image change to its container (the grid)*/
   height: auto;
   color: rgb(0, 115, 186);
   text-align:center;
   justify-self: center;
-  font-size:14px;
+  font-size: clamp(12px, 3vw, 25px);
   margin-top: 5px;
+  min-width: 15%;
 }
 /* endScreen book container images' style */
 .bookContainer img {
-  width: 100%; /* Make the image change to its container */
+  width: 100%;
   align-self: center;
   justify-self: center;
+  min-width: 15%;
+  
 }
 /* endScreen book container style */
 .bookContainer {
   display: grid;
   align-content: flex-start;
-  max-width: 150px;  /* Adjust to make books smaller ! ! !*/
+  max-width: 150px;  
   height: auto; 
   border-radius: 8px;
+  min-width: 15%;
+  
 }
 /* endScreen <a> class (for book img to send you to GoodReads link)*/
-
 .bookLink {
   display: grid;
   align-items: center;
@@ -222,4 +245,99 @@ text-align:center;
   border-radius: 8px;
   justify-self: center;
   align-self: center;
+  min-width: 15%;
+}
+
+#smallEndGameDiv {
+  display: flex;
+  align-items: center;
+  background-color: rgb(235, 248, 251);
+  min-width:300px;
+  padding-top:5px;
+  padding-bottom:5px;
+}
+
+#spotify {
+  height: auto; 
+  border-radius: 8px;
+  width: 60%;
+  margin: 2vw;
+}
+
+#allBookRecsContainer {
+  display: flex;
+  align-items: center;
+  background-color: rgb(235, 248, 251);
+  height: 10vh;
+  padding-top:5px;
+  padding-bottom:5px;
+}
+/*update this to add link*/
+#allBookRecsLink {
+  width: 15%; 
+  height: auto;
+}
+
+#allBookRecsButton {
+  width: 100%; 
+  height: auto; 
+}
+
+
+#allBookRecsDiv {
+  /*background-color: rgb(235, 248, 251);
+  min-height:40px; 
+  padding-top:5px;
+  width: 100%; 
+  min-width: 300px; */
+
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 columns */
+  grid-gap: 5px; 
+  padding-top:10px;
+  padding-bottom:10px;
+  min-width: 300px;
+  grid-row-gap: 30px; /* MORE vertical space between rows */
+  max-width: 800px;  /* Adjust to make books smaller ! ! !*/
+  overflow-y: scroll;
+  max-height: 525px;
+  margin: 0 auto; /* Center the grid horizontally */
+  padding-left: 30px; 
+  padding-right: 30px; 
+}
+
+.bookRating {
+  max-width: 150px; 
+  width: 100%; /* Makes the image change to its container (the grid)*/
+  height: auto;
+  color: rgb(186, 0, 136);
+  text-align:center;
+  justify-self: center;
+  font-size: clamp(8px, 1vw, 25px);
+  margin-top: 2px;
+  min-width: 15%;
+}
+
+.allBookRecsTitles {
+  max-width: 150px; 
+  width: 100%; /* Makes the image change to its container (the grid)*/
+  height: auto;
+  color: rgb(0, 115, 186);
+  text-align:center;
+  justify-self: center;
+  font-size: clamp(10px, 2.5vw, 25px);
+  margin-top: 5px;
+  min-width: 15%;
+}
+
+.allBookRecsRatings {
+  max-width: 150px; 
+  width: 100%; /* Makes the image change to its container (the grid)*/
+  height: auto;
+  color: rgb(0, 115, 186);
+  text-align:center;
+  font-size: clamp(5px, 2vw, 25px);
+  margin-top: 5px;
+  min-width: 15%;
+  justify-self: end;
 }
