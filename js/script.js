@@ -50,6 +50,11 @@ let endGame = false;
 async function loadBooksFromCSV(file) {
 
     const response = await fetch(file);
+
+    if (!response.ok) {
+        throw new Error(`Failed to load ${file}: ${response.status} ${response.statusText}`);
+    }
+
     const csvData = await response.text();
 
     //Getting data from the rows
