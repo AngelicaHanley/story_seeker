@@ -429,12 +429,14 @@ function getRandomInt(min, max) {
 }
 
 
-//Codeed it so it only works on the first screen
-if (window.location.pathname === '/index.html') {
+
 
 document.addEventListener('DOMContentLoaded', async function () {
     try {
+        console.log('Current pathname:', window.location.pathname);
+//Codeed it so it only works on the first screen
 
+if (window.location.pathname === '/index.html') {
         // Clear the Spotify playlist index when starting a new game
     localStorage.removeItem("spotifyRandomIndex");
     
@@ -448,8 +450,10 @@ document.addEventListener('DOMContentLoaded', async function () {
         books = await loadBooksFromCSV('bookData.csv');
         const gridBooks = displayBooks();
         console.log(gridBooks);
-    } catch (error) {
-        console.error('Error loading books:', error);
     }
-});
+    
+} catch (error) {
+    console.error('Error loading books:', error);
 }
+});
+//}
