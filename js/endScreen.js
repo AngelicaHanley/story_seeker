@@ -1,4 +1,4 @@
-
+console.log('Current pathname:', window.location.pathname);
 
 if (window.location.pathname === '/endScreen.html') {
    document.addEventListener('DOMContentLoaded', function () {
