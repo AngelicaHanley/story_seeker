@@ -23,7 +23,7 @@ if (window.location.pathname === '/story_seeker/endScreen.html') {
       //button path for testing
         //  buttonLink.href = "allBookRecs.html"; //adds link
       //button path for github!
-      uttonLink.href = "/story_seeker/allBookRecs.html";
+      buttonLink.href = "/story_seeker/allBookRecs.html";
     });
 }
 
