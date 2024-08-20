@@ -1,9 +1,7 @@
 
 
 if (window.location.pathname === '/endScreen.html') {
-
    document.addEventListener('DOMContentLoaded', function () {
-
         //Displaying genre result
         const resultElement = document.getElementById('end-game-result');
         //mainGenre variable retrieved
@@ -97,25 +95,83 @@ function displayEndGameBooks(retrievedSelectedGenreBooks) {
     return retrievedSelectedGenreBooks; //all books on the grid
 }
 
-function displaySpotifyRec(retrievedMainGenre){
-    //I am also going to want to add links to them so tbh will probably need to
-    //change this to make a playLists object to combine image and link ahhhh
 
-    let spotifyPlaylists = [];
-    for(let i = 1; i <=5 ; i++){
-        spotifyPlaylists.push(retrievedMainGenre + i + ".png"); //appending to array
-    } //got array full of Spotify image links (their string name)
-    //use random to get a random index value to pick a spotify playlist (from 0 to 4)
-    let randomIndex = Math.floor(Math.random() * (4 - 0) + 0); //is this how to get a random number from 0 to 4
-    let chosenPlaylistImage = spotifyPlaylists[randomIndex];
+function spotifyPlaylist(imagePath, spotifyLink) {
+    this.imagePath = imagePath;
+    this.spotifyLink = spotifyLink;
+}
+
+//Array of objects of playlists
+const spotifyPlaylists = [
+    //index: 0-4 are Romance genre
+    {
+        imagePath: "css/images/spotify_images/Romance1.png",
+        link: "https://open.spotify.com/playlist/4PLSf6EiOsoWL385abgoeX"
+    },
+    {
+        imagePath: "css/images/spotify_images/Romance2.png",
+        link: "https://open.spotify.com/playlist/4c8MUTW1ipZsO7lM9t8BIa"
+    },
+    {
+        imagePath: "css/images/spotify_images/Romance3.png",
+        link: "https://open.spotify.com/playlist/3qdvG9DQsVeq8EVSPK9GGD"
+    },
+    {
+        imagePath: "css/images/spotify_images/Romance4.png",
+        link: "https://open.spotify.com/playlist/1DZWtTI5DzupSSp8jvVIOE"
+    },
+    {
+        imagePath: "css/images/spotify_images/Romance5.png",
+        link: "https://open.spotify.com/playlist/5Jh2P13Nkn3yFaeWlhwErM"
+    },
+
+    //index: 5-10 are Fantasy genre
+    {
+        imagePath: "css/images/spotify_images/Fantasy1.png",
+        link: "https://open.spotify.com/playlist/5HteG3iHuZRz8l5zo48cJD"
+    },
+    {
+        imagePath: "css/images/spotify_images/Fantasy2.png",
+        link: "https://open.spotify.com/playlist/6yIfxGFCjeoQ73u7Y4xAYX"
+    },
+    {
+        imagePath: "css/images/spotify_images/Fantasy3.png",
+        link: "https://open.spotify.com/playlist/0Aafs9d3simn5z9CVMktPE"
+    },
+    {
+        imagePath: "css/images/spotify_images/Fantasy4.png",
+        link: "https://open.spotify.com/playlist/5gmcpMlhNfoQOynwH5Wx3L"
+    },
+    {
+        imagePath: "css/images/spotify_images/Fantasy5.png",
+        link: "https://open.spotify.com/playlist/4RN5X0XaS9VSRgCdJsr5Gz"
+    }
+];
+
+//ADD CLICKING PHOTO TO SEND TO GOODREADS ! ! !
+function displaySpotifyRec(retrievedMainGenre){
+    //gets randomIndex from script.js so it is saved
+    let randomIndex = JSON.parse(localStorage.getItem("spotifyRandomIndex"));
+    
+    let chosenPlaylistImage = spotifyPlaylists[randomIndex].imagePath;
+    let chosenPlaylistLink = spotifyPlaylists[randomIndex].link;
 
     const spotifyDiv = document.getElementById("smallEndGameDiv");
     const spotifyImgElement = document.getElementById("spotify");
 
-    spotifyImgElement.src = "css/images/spotify_images/" + chosenPlaylistImage;
-    spotifyImgElement.alt = retrievedMainGenre + " Playlist Image";
+    console.log(chosenPlaylistLink);
 
-   // spotifyDiv.appendChild(spotifyImgElement);
+    const spotifyLink = document.getElementById('smallEndGameDiv').querySelector('a');
+
+    if (spotifyLink) {
+       spotifyLink.classList.add("spotifyLinkClass");
+       spotifyLink.href = chosenPlaylistLink;
+       spotifyLink.target = "_blank"; //opens link in a new tab
+    } else {
+        console.error("Spotify link not found!");
+    }
+    spotifyImgElement.src = chosenPlaylistImage;
+    spotifyImgElement.alt = retrievedMainGenre + " Playlist Image";
 }
 
 function displayAllBookRecs() {
@@ -133,12 +189,6 @@ function displayAllBookRecs() {
     let i = 1;
 //For each book in array, creates a div with an img element and p for the title
 retrievedAllBookRecs.forEach(book => {
-    
-       /* console.log(`Title: ${book.title}`);
-        console.log(`Genres: ${book.genres}`);
-        console.log(`Rating: ${book.rating}`);
-        console.log(`Cover Img: ${book.imagePath}`);
-        console.log(`Book Link: ${book.goodreadsURL}`);*/
 
         //Creating a div for each book
         let bookDiv = document.createElement("div");
@@ -176,20 +226,6 @@ retrievedAllBookRecs.forEach(book => {
      });
     return retrievedAllBookRecs; //all books on the grid
 }
-/*
-function displayAllBookRecs(){
-    const retrievedAllBookRecs = JSON.parse(localStorage.getItem("allBookRecs")); // Convert back to array
-    console.log(retrievedAllBookRecs);
-
-    let allBookRecsDiv = document.getElementById("allBookRecsDiv");
-    for(let i = 0; i <retrievedAllBookRecs.length ; i++){
-    const bookRec = document.createElement("p");
-    let bookNumber = i + 1;
-    bookRec.textContent = bookNumber + ". " + retrievedAllBookRecs[i].title;
-    allBookRecsDiv.appendChild(bookRec);
-    }
-}
-    */
 
 if (window.location.pathname === '/allBookRecs.html') {
 

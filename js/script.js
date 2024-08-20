@@ -45,6 +45,8 @@ let count = 0;
 let books = []; //MAIN ARRAY INITALIZED
 let myGlobalVariable = '';
 
+let endGame = false;
+
 async function loadBooksFromCSV(file) {
 
     const response = await fetch(file);
@@ -107,12 +109,28 @@ function handleBookClick(book, img, books) {
             count += 1;
         } 
         if (count == 10){ //add end-game logic here
+            endGame = true;
+            //new try ! ! !
+            localStorage.setItem("endGame", JSON.stringify(endGame)); //Convert to a string to store
+            console.log("LOCAL: ",endGame);
+
             bookTitle.textContent = "Bookshelf is full!";
             console.log("END GAME Count: ",count);
             totalPoints(); //add up genre points
             genreBookRecs(books); //get the 5 genre bookRecs !
             allBookRecs(books);
-
+        
+            //Add other genres IMP ! ! !
+            let i; //declare i so it is accessible outside of if statements
+            if(bookManager.mainGenre == "Romance"){
+                i = 0;
+            }
+            else if(bookManager.mainGenre == "Fantasy"){
+                i = 5;
+            }
+        //setting spotify index here so it is sent to endScreen and not changed each time that page is refreshed
+        let randomIndex = Math.floor(Math.random() * ((i+5) - i) + i);
+        localStorage.setItem("spotifyRandomIndex", JSON.stringify(randomIndex)); // Store playlist index
         }
     } else {
         //Book is already in the array (clicked again) so, remove it
@@ -411,6 +429,15 @@ if (window.location.pathname === '/index.html') {
 
 document.addEventListener('DOMContentLoaded', async function () {
     try {
+
+        // Clear the Spotify playlist index when starting a new game
+    localStorage.removeItem("spotifyRandomIndex");
+    
+      //  const spotifyRandomIndex = JSON.parse(localStorage.getItem("spotifyRandomIndex")); // Convert back to array
+      //  console.log("spotifyRandomIndex: ",spotifyRandomIndex);
+      //  localStorage.removeItem("spotifyRandomIndex"); //resets the saved spotify playlist
+     //   console.log("AFTER ",localStorage.getItem("spotifyRandomIndex"));
+        
         console.log("Trying code!");
         displayButton();
         books = await loadBooksFromCSV('bookData.csv');
