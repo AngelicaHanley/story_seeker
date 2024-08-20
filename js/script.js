@@ -436,14 +436,11 @@ document.addEventListener('DOMContentLoaded', async function () {
         console.log('Current pathname:', window.location.pathname);
 //Codeed it so it only works on the first screen
 
-if (window.location.pathname === '/index.html') {
+//if (window.location.pathname === '/index.html') { //use this for website testing
+    if (window.location.pathname === '/story_seeker/') { //this for github website
+
         // Clear the Spotify playlist index when starting a new game
     localStorage.removeItem("spotifyRandomIndex");
-    
-      //  const spotifyRandomIndex = JSON.parse(localStorage.getItem("spotifyRandomIndex")); // Convert back to array
-      //  console.log("spotifyRandomIndex: ",spotifyRandomIndex);
-      //  localStorage.removeItem("spotifyRandomIndex"); //resets the saved spotify playlist
-     //   console.log("AFTER ",localStorage.getItem("spotifyRandomIndex"));
         
         console.log("Trying code!");
         displayButton();
