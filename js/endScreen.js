@@ -1,6 +1,9 @@
 console.log('Current pathname:', window.location.pathname);
 
-if (window.location.pathname === '/endScreen.html') {
+//path for gitHub
+if (window.location.pathname === '/story_seeker/endScreen.html') {
+//path for testing
+//if (window.location.pathname === '/endScreen.html') {
    document.addEventListener('DOMContentLoaded', function () {
         //Displaying genre result
         const resultElement = document.getElementById('end-game-result');
@@ -226,8 +229,10 @@ retrievedAllBookRecs.forEach(book => {
      });
     return retrievedAllBookRecs; //all books on the grid
 }
-
-if (window.location.pathname === '/allBookRecs.html') {
+//path for github
+if (window.location.pathname === '/story_seeker/allBookRecs.html') {
+//path for testing
+//if (window.location.pathname === '/allBookRecs.html') {
 
 document.addEventListener('DOMContentLoaded', function () {
 
