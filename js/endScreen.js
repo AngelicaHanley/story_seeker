@@ -20,7 +20,10 @@ if (window.location.pathname === '/story_seeker/endScreen.html') {
         //making button work
 
         const buttonLink = document.querySelector(".div-3 a"); //Get the <a> element 
-        buttonLink.href = "allBookRecs.html"; //adds link
+      //button path for testing
+        //  buttonLink.href = "allBookRecs.html"; //adds link
+      //button path for github!
+      uttonLink.href = "/story_seeker/allBookRecs.html";
     });
 }
 
