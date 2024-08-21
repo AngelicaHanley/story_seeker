@@ -437,7 +437,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 //Codeed it so it only works on the first screen
 
 //if (window.location.pathname === '/index.html') { //use this for website testing
-    if (window.location.pathname === '/story_seeker/') { //this for github website
+    if (window.location.pathname === '/story_seeker/index.html') { //this for github website
 
         // Clear the Spotify playlist index when starting a new game
     localStorage.removeItem("spotifyRandomIndex");
