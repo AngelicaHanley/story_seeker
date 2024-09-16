@@ -1,5 +1,7 @@
 # Story Seeker Project Description
 
+#How to Use: go to the link https://angelicahanley.github.io/story_seeker/ for the website!
+
 #Engineered a book recommendation website, delivering personalized book recommendations based on user-selections
 
 #Developed front-end of website using HTML and CSS, and implemented back-end functionality and data management using JavaScript
