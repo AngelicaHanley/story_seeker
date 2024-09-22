@@ -447,12 +447,16 @@ function getRandomInt(min, max) {
 document.addEventListener('DOMContentLoaded', async function () {
     try {
         console.log('Current pathname:', window.location.pathname);
+        //printed out this: /story_seeker/index.html
 //Coded it so it only works on the first screen
 
 //IMP! ! !: use this for website testing
 //if (window.location.pathname === '/index.html') { 
 //IMP! ! !: use this for github website
-if (window.location.pathname === '/story_seeker/') {
+
+if (window.location.pathname === '/story_seeker/' || window.location.pathname === '/story_seeker/index.html' || window.location.pathname === '/index.html') {
+
+//if (window.location.pathname === '/story_seeker/') {
   //  if (window.location.pathname === '/story_seeker/index.html') {
 
         // Clear the Spotify playlist index when starting a new game
