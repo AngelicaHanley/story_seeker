@@ -1,9 +1,9 @@
 console.log('Current pathname:', window.location.pathname);
 
 //path for gitHub
-if (window.location.pathname === '/story_seeker/endScreen.html') {
+//if (window.location.pathname === '/story_seeker/endScreen.html') {
 //path for testing
-//if (window.location.pathname === '/endScreen.html') {
+if (window.location.pathname === '/endScreen.html') {
    document.addEventListener('DOMContentLoaded', function () {
         //Displaying genre result
         const resultElement = document.getElementById('end-game-result');
@@ -21,8 +21,8 @@ if (window.location.pathname === '/story_seeker/endScreen.html') {
 
         const buttonLink = document.querySelector(".div-3 a"); //Get the <a> element 
       //button path for testing
-        //  buttonLink.href = "allBookRecs.html"; //adds link
-      //button path for github!
+      //    buttonLink.href = "allBookRecs.html"; //adds link
+      //IMP ! ! ! button path for github!
       buttonLink.href = "/story_seeker/allBookRecs.html";
     });
 }
@@ -131,7 +131,7 @@ const spotifyPlaylists = [
         link: "https://open.spotify.com/playlist/5Jh2P13Nkn3yFaeWlhwErM"
     },
 
-    //index: 5-10 are Fantasy genre
+    //index: 5-9 are Fantasy genre
     {
         imagePath: "css/images/spotify_images/Fantasy1.png",
         link: "https://open.spotify.com/playlist/5HteG3iHuZRz8l5zo48cJD"
@@ -151,7 +151,75 @@ const spotifyPlaylists = [
     {
         imagePath: "css/images/spotify_images/Fantasy5.png",
         link: "https://open.spotify.com/playlist/4RN5X0XaS9VSRgCdJsr5Gz"
+    },
+
+    //index: 10-14 are Mystery genre
+    {
+        imagePath: "css/images/spotify_images/Mystery1.png",
+        link: "https://open.spotify.com/playlist/7efmyhFFuXfUNFzbr7Ud8H"
+    },
+    {
+        imagePath: "css/images/spotify_images/Mystery2.png",
+        link: "https://open.spotify.com/playlist/1dINYJuJEvYDVey8tiwZfR"
+    },
+    {
+        imagePath: "css/images/spotify_images/Mystery3.png",
+        link: "https://open.spotify.com/playlist/5JyN0SxZNlJ9WG3fH0Dlwp"
+    },
+    {
+        imagePath: "css/images/spotify_images/Mystery4.png",
+        link: "https://open.spotify.com/playlist/7GLNvat9Eu6UBNoJrStdG7"
+    },
+    {
+        imagePath: "css/images/spotify_images/Mystery5.png",
+        link: "https://open.spotify.com/playlist/3llvhBYJlGFuLljoi58flG"
+    },
+
+    //index: 15-19 are Science Fiction genre
+    {
+        imagePath: "css/images/spotify_images/ScienceFiction1.png",
+        link: "https://open.spotify.com/playlist/4bapZgpCgXCIcd6Gow0oAT"
+    },
+    {
+        imagePath: "css/images/spotify_images/ScienceFiction2.png",
+        link: "https://open.spotify.com/playlist/3Q7hLJUbpaewXK00RUA3Or"
+    },
+    {
+        imagePath: "css/images/spotify_images/ScienceFiction3.png",
+        link: "https://open.spotify.com/playlist/4gIUkbs2ovmAarHk7LtgGG"
+    },
+    {
+        imagePath: "css/images/spotify_images/ScienceFiction4.png",
+        link: "https://open.spotify.com/playlist/46oDhdW6aEYQguGaviHISp"
+    },
+    {
+        imagePath: "css/images/spotify_images/ScienceFiction5.png",
+        link: "https://open.spotify.com/playlist/1q0oo2fAMLbbtbQviAnKVe"
+    },
+    //index: 20-24 are classics genre
+    {
+        imagePath: "css/images/spotify_images/Classics1.png",
+        link: "https://open.spotify.com/playlist/6ena9PFQupByE8rWtOEQZ0"
+    },
+    {
+        imagePath: "css/images/spotify_images/Classics2.png",
+        link: "https://open.spotify.com/playlist/7I1IWlpV88ZYw4sGy5ejb6"
+    },
+    {
+        imagePath: "css/images/spotify_images/Classics3.png",
+        link: "https://open.spotify.com/playlist/0y5Vyj3nk0wTNjm4UddKSK"
+    },
+    {
+        imagePath: "css/images/spotify_images/Classics4.png",
+        link: "https://open.spotify.com/playlist/2Zj2nPmOfSjrFJyXgl1Ktp"
+    },
+    {
+        imagePath: "css/images/spotify_images/Classics5.png",
+        link: "https://open.spotify.com/playlist/0Y5rFueIleDhEAy1dUP6Hb"
     }
+
+    //index: 24-29 are Fiction/other genre
+
 ];
 
 //ADD CLICKING PHOTO TO SEND TO GOODREADS ! ! !
@@ -238,7 +306,6 @@ if (window.location.pathname === '/story_seeker/allBookRecs.html') {
 //if (window.location.pathname === '/allBookRecs.html') {
 
 document.addEventListener('DOMContentLoaded', function () {
-
     displayAllBookRecs();
 });
 

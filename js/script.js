@@ -133,6 +133,19 @@ function handleBookClick(book, img, books) {
             else if(bookManager.mainGenre == "Fantasy"){
                 i = 5;
             }
+            //check these
+            else if(bookManager.mainGenre == "Mystery"){
+                i = 10;
+            }
+            else if(bookManager.mainGenre == "Science Fiction"){
+                i = 15;
+            }
+            else if(bookManager.mainGenre == "Classics"){
+                i = 20;
+            }
+            else if(bookManager.mainGenre == "Fiction"){
+                i = 25;
+            }
         //setting spotify index here so it is sent to endScreen and not changed each time that page is refreshed
         let randomIndex = Math.floor(Math.random() * ((i+5) - i) + i);
         localStorage.setItem("spotifyRandomIndex", JSON.stringify(randomIndex)); // Store playlist index
@@ -434,10 +447,12 @@ function getRandomInt(min, max) {
 document.addEventListener('DOMContentLoaded', async function () {
     try {
         console.log('Current pathname:', window.location.pathname);
-//Codeed it so it only works on the first screen
+//Coded it so it only works on the first screen
 
-//if (window.location.pathname === '/index.html') { //use this for website testing
-    if (window.location.pathname === '/story_seeker/index.html') { //this for github website
+//IMP! ! !: use this for website testing
+//if (window.location.pathname === '/index.html') { 
+//IMP! ! !: use this for github website
+    if (window.location.pathname === '/story_seeker/index.html') {
 
         // Clear the Spotify playlist index when starting a new game
     localStorage.removeItem("spotifyRandomIndex");
