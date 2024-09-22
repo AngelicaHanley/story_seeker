@@ -83,6 +83,17 @@ font-size: clamp(15px, 4vw, 50px);
   width: 100%; 
 }
 
+#aboutMeText {
+  text-align: left; 
+  font-size:20px;
+  color: rgb(0, 0, 0); 
+  margin-bottom: 5px; 
+  word-wrap: break-word; /*Makes sure long words will break and wrap onto the next line */
+  overflow-wrap: break-word; 
+  white-space: normal;
+  width: 100%; 
+}
+
 .book {
   display: flex; /* Use flex to center the content */
   justify-content: center; 
