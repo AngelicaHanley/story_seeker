@@ -85,8 +85,8 @@ font-size: clamp(15px, 4vw, 50px);
 
 #aboutMeText {
   text-align: left; 
-  font-size:20px;
-  color: rgb(0, 0, 0); 
+  font-size:18px;
+  color: rgb(0, 115, 186); 
   margin-bottom: 5px; 
   word-wrap: break-word; /*Makes sure long words will break and wrap onto the next line */
   overflow-wrap: break-word; 

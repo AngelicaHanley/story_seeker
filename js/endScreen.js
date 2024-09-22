@@ -1,7 +1,7 @@
 console.log('Current pathname:', window.location.pathname);
 
 //path for github
-if (window.location.pathname === '/story_seeker/endScreen.html') {
+if (window.location.pathname === '/story_seeker/endScreen.html' || window.location.pathname === '/endScreen.html') {
 //path for testing
 //if (window.location.pathname === '/endScreen.html') {
    document.addEventListener('DOMContentLoaded', function () {
@@ -301,7 +301,7 @@ retrievedAllBookRecs.forEach(book => {
     return retrievedAllBookRecs; //all books on the grid
 }
 //path for github
-if (window.location.pathname === '/story_seeker/allBookRecs.html') {
+if (window.location.pathname === '/story_seeker/allBookRecs.html' || window.location.pathname === '/allBookRecs.html') {
 //path for testing
 //if (window.location.pathname === '/allBookRecs.html') {
 

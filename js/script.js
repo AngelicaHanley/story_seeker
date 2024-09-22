@@ -173,7 +173,8 @@ function handleBookClick(book, img, books) {
     }
     //Debugging
     let selectedTitles = selectedBooks.map(selectedBook => selectedBook.title);
-    console.log('Selected Books:', selectedTitles);
+    //IMP ! ! debugging
+    //console.log('Selected Books:', selectedTitles);
 
     displayButton(); //update display button after every click
 }
@@ -217,12 +218,12 @@ function displayBooks() {
 //For each book in array, creates a div with an img element and p for the title
     gridBooks.forEach(book => {
 
-        console.log(`Title: ${book.title}`);
-        console.log(`Genres: ${book.genres}`);
-
-        console.log(`Rating: ${book.rating}`);
-        console.log(`Cover Img: ${book.imagePath}`);
-        console.log(`Book Link: ${book.goodreadsURL}`);
+        //IMP !! debugging
+        //console.log(`Title: ${book.title}`);
+        //console.log(`Genres: ${book.genres}`);
+        //console.log(`Rating: ${book.rating}`);
+        //console.log(`Cover Img: ${book.imagePath}`);
+        //console.log(`Book Link: ${book.goodreadsURL}`);
 
         //Creating a div for each book
         let bookDiv = document.createElement("div");
@@ -277,7 +278,8 @@ function totalPoints() {
 
     //Creating arrays from the genres of books picked
     let selectedGenres = selectedBooks.map(selectedBook => selectedBook.genres);
-    console.log('Selected Genres:', selectedGenres);
+    //IMP ! ! debugging
+    //('Selected Genres:', selectedGenres);
 
       //Iterating through all the arrays in selectedGenres
       selectedGenres.forEach(genresArray => {
