@@ -368,10 +368,10 @@ function genreBookRecs(books){
     console.log("Selected Genre Books in script: ",bookManager.selectedGenreBooks);
     //setting items to use in other JS files!
     localStorage.setItem("mainGenre", JSON.stringify(bookManager.mainGenre)); //Convert to a string to store
-    console.log("LOCAL: ",bookManager.mainGenre);
+   // console.log("LOCAL: ",bookManager.mainGenre);
 
     localStorage.setItem("selectedGenreBooks", JSON.stringify(bookManager.selectedGenreBooks));
-    console.log("LOCAL: ",bookManager.selectedGenreBooks);
+  //  console.log("LOCAL: ",bookManager.selectedGenreBooks);
 }
 
 
@@ -412,7 +412,7 @@ function allBookRecs(books){
         }
     }
     localStorage.setItem("allBookRecs", JSON.stringify(allBookRecs));
-    console.log("LOCAL: ",allBookRecs);
+   // console.log("LOCAL: ",allBookRecs);
     return allBookRecs;
 }
 
@@ -468,7 +468,7 @@ if (window.location.pathname === '/story_seeker/' || window.location.pathname ==
         displayButton();
         books = await loadBooksFromCSV('bookData.csv');
         const gridBooks = displayBooks();
-        console.log(gridBooks);
+      //  console.log(gridBooks);
     }
     
 } catch (error) {
