@@ -84,6 +84,7 @@ font-size: clamp(15px, 4vw, 50px);
 }
 
 #aboutMeText {
+  margin-left: 20px; 
   text-align: left; 
   font-size:18px;
   color: rgb(0, 115, 186); 
