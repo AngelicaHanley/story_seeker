@@ -217,9 +217,29 @@ const spotifyPlaylists = [
     {
         imagePath: "css/images/spotify_images/Classics5.png",
         link: "https://open.spotify.com/playlist/0Y5rFueIleDhEAy1dUP6Hb"
-    }
+    },
 
-    //index: 24-29 are Fiction/other genre
+    //index: 25-29 are Fiction/other genre
+    {
+        imagePath: "css/images/spotify_images/Other1.png",
+        link: "https://open.spotify.com/playlist/65mwgCuMuWrRm0cE9XGZFE"
+    },
+    {
+        imagePath: "css/images/spotify_images/Other2.png",
+        link: "https://open.spotify.com/playlist/3SHPMfv70TxVWuxgmj0fQO"
+    },
+    {
+        imagePath: "css/images/spotify_images/Other3.png",
+        link: "https://open.spotify.com/playlist/2lgOLSlmIy9GbnvMN0hkJD"
+    },
+    {
+        imagePath: "css/images/spotify_images/Other4.png",
+        link: "https://open.spotify.com/playlist/34xu1Ho7uHzBAKLJ0GqGks"
+    },
+    {
+        imagePath: "css/images/spotify_images/Other5.png",
+        link: "https://open.spotify.com/playlist/3xQS9CW94bnbyNQflIWRam?si=TxfVm3WpSBOTQoHJQIgc1w&nd=1&dlsi=42ea4637ddb04213"
+    }
 
 ];
 
