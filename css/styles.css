@@ -64,6 +64,12 @@ margin:1px;
 font-size: clamp(15px, 4vw, 50px);
 }
 
+#linkedIn {
+  color:white;
+  margin:1px;
+  font-size: clamp(15px, 4vw, 50px);
+}
+
 .div-2 {
   background-color: rgb(235, 248, 251);
   min-height:40px; 
@@ -86,7 +92,7 @@ font-size: clamp(15px, 4vw, 50px);
 #aboutMeText {
   margin-left: 20px; 
   text-align: left; 
-  font-size:18px;
+  font-size:24px;
   color: rgb(0, 115, 186); 
   margin-bottom: 5px; 
   word-wrap: break-word; /*Makes sure long words will break and wrap onto the next line */
@@ -359,4 +365,15 @@ font-size: clamp(15px, 4vw, 50px);
   border-radius: 8px;
   width: 60%;
   margin: 2vw;
+}
+
+#instructionsGrid {
+  display: grid;
+  padding:1vw;
+  max-width: 1000px;  /* Adjust to make books max smaller ! ! !*/
+  margin: 0 auto;
+  /* ADDED BORDER */
+  border: 10px ridge lightskyblue;
+  border-radius: 8px;
+  min-width: 280px;
 }
