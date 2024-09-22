@@ -54,9 +54,10 @@ footer {
   text-align:center;
   min-width: 300px;
   min-height: 66px;
-  display: flex; 
   justify-content: center; 
   align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 h2 {
 color:white;
@@ -65,9 +66,11 @@ font-size: clamp(15px, 4vw, 50px);
 }
 
 #linkedIn {
-  color:white;
+  display: block;
+  color: rgb(0, 115, 186);
   margin:1px;
-  font-size: clamp(15px, 4vw, 50px);
+  font-size: clamp(15px, 4vw, 35px);
+  margin-top: 10px;
 }
 
 .div-2 {
@@ -90,7 +93,7 @@ font-size: clamp(15px, 4vw, 50px);
 }
 
 #aboutMeText {
-  margin-left: 20px; 
+  margin: 5px; 
   text-align: left; 
   font-size:24px;
   color: rgb(0, 115, 186); 
@@ -367,7 +370,7 @@ font-size: clamp(15px, 4vw, 50px);
   margin: 2vw;
 }
 
-#instructionsGrid {
+#instructionsDiv {
   display: grid;
   padding:1vw;
   max-width: 1000px;  /* Adjust to make books max smaller ! ! !*/
